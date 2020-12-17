@@ -6,7 +6,7 @@ package org.epifany.pokemonbreedprobabilitycalculator;
 
 import java.util.HashMap;
 import java.util.List;
-import org.epifany.combination.NodeCombinationCalculator;
+import org.epifany.permutation.NodePermutationCalculator;
 
 /**
  * This class handles, and saves,
@@ -20,7 +20,7 @@ public class PokemonCalcManager {
 	private boolean noitem;
 	private boolean everstone;
 	
-	private final HashMap<String, NodeCombinationCalculator> calculators;
+	private final HashMap<String, NodePermutationCalculator> calculators;
 	private String currentKey;
 	
 	public PokemonCalcManager(){
@@ -32,7 +32,7 @@ public class PokemonCalcManager {
 		if( calculators.get( currentKey) == null){
 			System.out.println( "New key: " + currentKey);
 			// Generate a new calculator here
-			NodeCombinationCalculator calc_new = createNewCalculator();
+			NodePermutationCalculator calc_new = createNewCalculator();
 			calculators.put( currentKey, calc_new);
 		}/*
 		else{
@@ -40,8 +40,8 @@ public class PokemonCalcManager {
 		}*/
 	}
 	
-	private NodeCombinationCalculator createNewCalculator(){
-		NodeCombinationCalculator calculator;
+	private NodePermutationCalculator createNewCalculator(){
+		NodePermutationCalculator calculator;
 		int[] indices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 		int[] split_a = { 0, 1, 2, 3, 4, 5};
 		int[] split_b = { 6, 7, 8, 9, 10, 11};
@@ -51,18 +51,18 @@ public class PokemonCalcManager {
 			numElements = 2;
 			int priority_a = Character.getNumericValue( currentKey.charAt(0));
 			int priority_b = Character.getNumericValue( currentKey.charAt(1)) + 6;
-			calculator = new NodeCombinationCalculator( indices, numElements);
+			calculator = new NodePermutationCalculator( indices, numElements);
 			calculator.splitNodes( split_a, split_b);
 			for( int i = 0; i < calculator.size(); i++){
-				List<Integer> combination = calculator.get(i);
+				List<Integer> permutation = calculator.get(i);
 				// "Invalid" set. Remove it, then decrement counter to correctly iterate through list again
-				if( combination.contains( priority_a) && combination.contains( priority_b)){
+				if( permutation.contains( priority_a) && permutation.contains( priority_b)){
 					calculator.remove(i--);
 				}
-				else if( combination.contains( priority_a)){
+				else if( permutation.contains( priority_a)){
 					calculator.appendElement( calculator.getNode(i), priority_b);
 				}
-				else if( combination.contains( priority_b)){
+				else if( permutation.contains( priority_b)){
 					calculator.appendElement( calculator.getNode(i), priority_a);
 				}
 				else{
@@ -101,7 +101,7 @@ public class PokemonCalcManager {
 				}
 			}
 			// New calculator
-			calculator = new NodeCombinationCalculator( indices_priority, numElements);
+			calculator = new NodePermutationCalculator( indices_priority, numElements);
 			calculator.splitNodes( split_a, split_b);
 			// Go through every node and add the master element
 			for( int i = 0; i < calculator.size(); i++){
@@ -113,12 +113,12 @@ public class PokemonCalcManager {
 		|| currentKey.equals("dn")
 		|| currentKey.equals("nd")){
 			// Destiny Knot sets it so that the child will inherit 5 IVs
-			calculator = new NodeCombinationCalculator( indices, 5);
+			calculator = new NodePermutationCalculator( indices, 5);
 			calculator.splitNodes( split_a, split_b);
 		}
 		else{
 			// Child will inherit 3 IVs
-			calculator = new NodeCombinationCalculator( indices, 3);
+			calculator = new NodePermutationCalculator( indices, 3);
 			calculator.splitNodes( split_a, split_b);
 		}
 		return calculator;
@@ -148,7 +148,7 @@ public class PokemonCalcManager {
 	public void setEverstone( boolean e){	everstone = e;	}
 	public void setNoItem( boolean i){	noitem = i;	}
 	
-	public NodeCombinationCalculator getCalculatorAt( String key){
+	public NodePermutationCalculator getCalculatorAt( String key){
 		return calculators.get(key);
 	}
 	

@@ -5,8 +5,8 @@ package org.epifany.pokemonbreedprobabilitycalculator.model.basic;
 
 /**
  * This class represents a special type of fraction:
- * the numerator will denote the number of combinations that satisfy the user condition
- * the denominator will denote the total number of combinations
+ * the numerator will denote the number of permutations that satisfy the user condition
+ * the denominator will denote the total number of permutations
  * 
  * @author Stephen Gung
  */

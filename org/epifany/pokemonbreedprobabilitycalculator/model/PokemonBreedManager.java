@@ -5,23 +5,23 @@
 package org.epifany.pokemonbreedprobabilitycalculator.model;
 
 import java.util.HashMap;
-import org.epifany.combination.Node;
-import org.epifany.combination.NodeCombinationCalculator;
+import org.epifany.permutation.Node;
+import org.epifany.permutation.NodePermutationCalculator;
 
 /**
  * This class contains a breeding calculator, has knowledge of Pokemon A & Pokemon B,
- * as well as a IV value mapping w.r.t. the expanded breeding combinations
+ * as well as a IV value mapping w.r.t. the expanded breeding permutations
  * 
  * @author Stephen Gung
  */
 public class PokemonBreedManager {
 	// The calculator associated with this class
-	private NodeCombinationCalculator calculator;
+	private NodePermutationCalculator calculator;
 	private boolean changed_calculator;
 	// The Pokemon manager associated with this class
 	private PokemonABManager abManager;
 	private boolean changed_manager;
-	/* This maps the (splitted) combinations to the respective IV values.
+	/* This maps the (splitted) permutations to the respective IV values.
 	The IV values are obtained from either Pokemon A or Pokemon B */
 	private final HashMap< Node, int[]> IV_map;
 	// Although these variables arne't necessarily needed, I did this for "good practice"
@@ -48,23 +48,23 @@ public class PokemonBreedManager {
 		IV_map = new HashMap();
 	}
 	
-	public PokemonBreedManager( NodeCombinationCalculator c){
-		calculator = new NodeCombinationCalculator( c);
+	public PokemonBreedManager( NodePermutationCalculator c){
+		calculator = new NodePermutationCalculator( c);
 		changed_calculator = true;
 		IV_map = new HashMap();
 	}
 	
-	public PokemonBreedManager( PokemonABManager m, NodeCombinationCalculator c){
+	public PokemonBreedManager( PokemonABManager m, NodePermutationCalculator c){
 		abManager = new PokemonABManager( m);
 		changed_manager = true;
-		calculator = new NodeCombinationCalculator( c);
+		calculator = new NodePermutationCalculator( c);
 		changed_calculator = true;
 		IV_map = new HashMap();
 	}
 	
 	// Copy Constructor method
 	public PokemonBreedManager( PokemonBreedManager pbm){
-		calculator = new NodeCombinationCalculator( pbm.calculator);
+		calculator = new NodePermutationCalculator( pbm.calculator);
 		abManager = new PokemonABManager( pbm.abManager);
 		IV_map = new HashMap( pbm.IV_map);
 	}
@@ -92,7 +92,7 @@ public class PokemonBreedManager {
 		return true;
 	}
 	
-	public void setCalculator( NodeCombinationCalculator c){
+	public void setCalculator( NodePermutationCalculator c){
 		calculator = c;
 		changed_calculator = true;
 	}
@@ -102,7 +102,7 @@ public class PokemonBreedManager {
 		changed_manager = true;
 	}
 	
-	// Evaluates the IV mapping(s) for this particular combination
+	// Evaluates the IV mapping(s) for this particular permutation
 	private void evaluateIVMapping( Node node){
 		if( node.isLeaf()){
 			int[] ivs = expandIV( node.getElements());
@@ -166,7 +166,7 @@ public class PokemonBreedManager {
 		return values;
 	}
 	
-	public NodeCombinationCalculator getCalculator(){	return calculator;	}
+	public NodePermutationCalculator getCalculator(){	return calculator;	}
 	public PokemonABManager getABManager(){	return abManager;	}
 	public int[] getIVs( Node node){	return IV_map.get(node);	}
 }

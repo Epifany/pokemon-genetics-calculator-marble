@@ -7,7 +7,7 @@ package org.epifany.pokemonbreedprobabilitycalculator;
 import java.text.NumberFormat;
 import org.epifany.pokemonbreedprobabilitycalculator.model.HLIEManager;
 import org.epifany.pokemonbreedprobabilitycalculator.gui.*;
-import org.epifany.combination.NodeCombinationCalculator;
+import org.epifany.permutation.NodePermutationCalculator;
 import org.epifany.pokemon.*;
 import org.epifany.pokemonbreedprobabilitycalculator.PokemonCalcManager.CalcType;
 import org.epifany.pokemonbreedprobabilitycalculator.model.PokemonABManager;
@@ -77,7 +77,7 @@ public class PokemonPresenter {
 		
 		calcManager.updateCurrentKey();
 		calcManager.updateCalculators();
-		NodeCombinationCalculator currentCalculator = calcManager.getCalculatorAt( calcManager.getCurrentKey());
+		NodePermutationCalculator currentCalculator = calcManager.getCalculatorAt( calcManager.getCurrentKey());
 		manager.getBreedManager().setCalculator( currentCalculator);
 		
 		Pokemon pokemon_A =	new Pokemon( 99, "A", Gender.MALE, Nature.MODEST,

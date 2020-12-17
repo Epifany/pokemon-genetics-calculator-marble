@@ -5,7 +5,7 @@
 package org.epifany.pokemonbreedprobabilitycalculator;
 
 import java.util.HashMap;
-import org.epifany.combination.Node;
+import org.epifany.permutation.Node;
 import org.epifany.pokemonbreedprobabilitycalculator.model.PokemonBreedManager;
 import org.epifany.pokemonbreedprobabilitycalculator.model.basic.Fraction;
 import org.epifany.pokemon.PokemonHelper;
@@ -76,7 +76,7 @@ public class PokemonProbRBManager {
 		if( probabilities.get(currentKey) == null){
 			System.out.println( "New key: " + currentKey);
 			Fraction fraction = new Fraction( 0, 0);
-			// Iterate through every combination for probability
+			// Iterate through every permutation for probability
 			for( int i = 0; i < breed.getCalculator().size(); i++){
 				Node target = breed.getCalculator().getNode(i);
 				Fraction temp = calculateFraction( target);
