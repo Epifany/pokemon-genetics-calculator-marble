@@ -1,5 +1,10 @@
 ## Pokemon Genetics Probability Calculator (Gen 6 and currently onward)
 
+This version uses the "marble" approach to calculate possibilities:<br>
+Each of the 12 IVs from the parents are a "marble",
+and (depending on your inclusion of Destiny Knot) 3 or 5 marbles are selected to be passed to the baby Pokemon.<br>
+This calculator considers the chance of when IVs overlap, such as when the HP IVs of both parents are selected to be passed down.
+
 This is a new version of a probability calculator I created a few years ago, with several changes made:
 
 The calculator now includes the option for the Pokemon to hold an Everstone<br>
