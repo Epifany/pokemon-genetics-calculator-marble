@@ -42,7 +42,7 @@ public class PokemonCalcManager {
 	
 	private NodeCombinationCalculator createNewCalculator(){
 		NodeCombinationCalculator calculator;
-		int[] indices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 , 10, 11};
+		int[] indices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 		int[] split_a = { 0, 1, 2, 3, 4, 5};
 		int[] split_b = { 6, 7, 8, 9, 10, 11};
 		int numElements;
@@ -55,6 +55,7 @@ public class PokemonCalcManager {
 			calculator.splitNodes( split_a, split_b);
 			for( int i = 0; i < calculator.size(); i++){
 				List<Integer> combination = calculator.get(i);
+				// "Invalid" set. Remove it, then decrement counter to correctly iterate through list again
 				if( combination.contains( priority_a) && combination.contains( priority_b)){
 					calculator.remove(i--);
 				}
