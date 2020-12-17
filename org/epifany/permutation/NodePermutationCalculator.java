@@ -1,5 +1,5 @@
 /**
- * Copyright 2019, Stephen Gung, All rights reserved
+ * Copyright 2020, Stephen Gung, All rights reserved
  */
 package org.epifany.permutation;
 
@@ -61,7 +61,6 @@ public class NodePermutationCalculator extends PermutationCalculator {
 		super( ncc);
 		nodes = new ArrayList( ncc.nodes);
 	}
-	
 	public boolean splitNodes( int[] split1, int[] split2){
 		if( split1.length != split2.length)
 			return false;
@@ -80,7 +79,10 @@ public class NodePermutationCalculator extends PermutationCalculator {
 				int[] elements_target = target.getElements();
 				int index1 = -1;
 				int index2 = -1;
-				boolean split_target = false;
+				boolean proceedToSplit = false;
+				// The purpose of the following for loop is to find the indices of two specific values
+				// If we do find these two specific values, we'll then create two nodes
+				// Each of which contains one of these specific values
 				for( int t = 0; t < elements_target.length; t++){
 					// If we found the first occurrence of the target value
 					if( elements_target[t] == s1 && index1 == -1){
@@ -96,12 +98,12 @@ public class NodePermutationCalculator extends PermutationCalculator {
 					// }
 					// If we found the indices with which to split
 					if( index1 != -1 && index2 != -1){
-						split_target = true;
+						proceedToSplit = true;
 						splitNodes = true;
 						break;
 					}
 				}
-				if( split_target){
+				if( proceedToSplit){
 					// We want to split them into left and right nodes
 					int[] elements_child = new int[ elements_target.length - 1];
 					int count = 1;
@@ -144,7 +146,6 @@ public class NodePermutationCalculator extends PermutationCalculator {
 			appendElement( target.getRightChild(), e1, e2);
 		}
 	}
-	
 	
 	public void appendElement( Node target, int e){
 		if( target.isLeaf()){
