@@ -85,7 +85,7 @@ public class PokemonGUIContainer {
 		highlow_b = new HighLowContainer("B");
 		highlow_ab = new HighLowContainer("A & B");
 		highlow_perfect = new JLabel("0 / 0");
-		radioButtonContainer = new RadioButtonContainer( "Perfect", "Not perfect", "Either");
+		radioButtonContainer = new RadioButtonContainer( "Perfect", "Not perfect", "Either", "Correct Nature?");
 		rbLabel = new JLabel("0 / 0");
 		rbLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 	}
@@ -206,7 +206,7 @@ public class PokemonGUIContainer {
 		// Row 1, column 0, width 8
 		c.gridy = 1;
 		c.gridwidth = 8;
-		panel.add( radioButtonContainer.createRadioButtonPanel(), c);
+		panel.add( radioButtonContainer.createMyDefaultPanel(), c);
 		// Row 2, column 0, width 8;
 		c.gridy = 2;
 		panel.add( rbLabel, c);
