@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import org.epifany.pokemon.PokemonHelper;
 import org.epifany.pokemonbreedprobabilitycalculator.PokemonCommand;
 
 /**
@@ -53,17 +54,33 @@ public class PokemonGUIContainer {
 		};
 		// Initialize Pokemon A Input guis
 		input_a = new InputContainer( spnrValues, itemValues,
-					"HP:", "Attack:", "Defense:", "Sp. Attack:", "Sp. Defense:", "Speed:");
+			PokemonHelper.HP_FULLTEXT + ":",
+			PokemonHelper.ATK_FULLTEXT + ":",
+			PokemonHelper.DEF_FULLTEXT + ":",
+			PokemonHelper.SPA_FULLTEXT + ":",
+			PokemonHelper.SPD_FULLTEXT + ":",
+			PokemonHelper.SPE_FULLTEXT + ":");
 		// Just for this program I set the initial index to 1
 		input_a.getItemCB().setSelectedIndex(1);
 		// Initialize Pokemon B Input guis
 		input_b = new InputContainer( spnrValues, itemValues,
-					"HP:", "Attack:", "Defense:", "Sp. Attack:", "Sp. Defense:", "Speed:");
+			PokemonHelper.HP_FULLTEXT + ":",
+			PokemonHelper.ATK_FULLTEXT + ":",
+			PokemonHelper.DEF_FULLTEXT + ":",
+			PokemonHelper.SPA_FULLTEXT + ":",
+			PokemonHelper.SPD_FULLTEXT + ":",
+			PokemonHelper.SPE_FULLTEXT + ":");
 		// Just for this program I set the initial index to 2
 		input_b.getItemCB().setSelectedIndex(2);
 		calculateButton = new JButton("Calculate");
 		resetButton = new JButton("Reset");
-		checkBoxContainer = new CheckBoxContainer( "HP", "Atk", "Def", "SpA", "SpD", "Spe");
+		checkBoxContainer = new CheckBoxContainer(
+			PokemonHelper.HP_TEXT,
+			PokemonHelper.ATK_TEXT,
+			PokemonHelper.DEF_TEXT,
+			PokemonHelper.SPA_TEXT,
+			PokemonHelper.SPD_TEXT,
+			PokemonHelper.SPE_TEXT);
 		highlow_a = new HighLowContainer("A");
 		highlow_b = new HighLowContainer("B");
 		highlow_ab = new HighLowContainer("A & B");
@@ -93,7 +110,7 @@ public class PokemonGUIContainer {
 		JPanel temp = createRadioButtonPanel( "Perfect Stat Probabilities");
 		temp.setAlignmentX(Component.LEFT_ALIGNMENT);
 		// These numbers were determined after finding out the size of this panel through debugging...
-		temp.setPreferredSize( new Dimension( 335, 200));
+		temp.setPreferredSize( new Dimension( 335, 225));
 		outputPanel.add( temp);
 		temp = createCheckBoxPanel( "Comparisons For The Curiously Inclined");
 		temp.setAlignmentX(Component.LEFT_ALIGNMENT);
