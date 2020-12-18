@@ -4,9 +4,12 @@
 
 package org.epifany.pokemonbreedprobabilitycalculator.gui;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -39,7 +42,9 @@ public class RadioButtonContainer {
 	protected final JRadioButton spd_optional_rb;
 	protected final JRadioButton spe_optional_rb;
 	
-	public RadioButtonContainer( String include, String exclude, String optional){
+	protected final JCheckBox everstone_checkbox;
+	
+	public RadioButtonContainer( String include, String exclude, String optional, String everstoneText){
 		hp_include_rb = createJRadioButton( include, true, PokemonCommand.HP_INC);
 		atk_include_rb = createJRadioButton( include, true, PokemonCommand.ATK_INC);
 		def_include_rb = createJRadioButton( include, true, PokemonCommand.DEF_INC);
@@ -60,6 +65,9 @@ public class RadioButtonContainer {
 		spa_optional_rb = createJRadioButton( optional, false, PokemonCommand.SPA_OPT);
 		spd_optional_rb = createJRadioButton( optional, false, PokemonCommand.SPD_OPT);
 		spe_optional_rb = createJRadioButton( optional, false, PokemonCommand.SPE_OPT);
+		
+		everstone_checkbox = new JCheckBox(everstoneText);
+		everstone_checkbox.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
 		ButtonGroup hp_group = new ButtonGroup();
 		ButtonGroup atk_group = new ButtonGroup();
@@ -93,8 +101,20 @@ public class RadioButtonContainer {
 		spe_group.add( spe_optional_rb);
 	}
 	
+	public JPanel createMyDefaultPanel(){
+		JPanel panel = new JPanel();
+		panel.setLayout( new BoxLayout( panel, BoxLayout.Y_AXIS));
+		
+		panel.add(everstone_checkbox);
+		JPanel temp = createRadioButtonPanel();
+		temp.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panel.add(temp);
+		
+		return panel;
+	}
+	
 	// Default panel for RadioButton gui
-	public JPanel createRadioButtonPanel(){
+	private JPanel createRadioButtonPanel(){
 		JPanel panel = new JPanel( new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		int width_label = 1;
@@ -169,20 +189,20 @@ public class RadioButtonContainer {
 	public JRadioButton getSpAIncludeRB(){	return spa_include_rb;	}
 	public JRadioButton getSpDIncludeRB(){	return spd_include_rb;	}
 	public JRadioButton getSpeIncludeRB(){	return spe_include_rb;	}
-	
 	public JRadioButton getHPExcludeRB(){	return hp_exclude_rb;	}
 	public JRadioButton getAtkExcludeRB(){	return atk_exclude_rb;	}
 	public JRadioButton getDefExcludeRB(){	return def_exclude_rb;	}
 	public JRadioButton getSpAExcludeRB(){	return spa_exclude_rb;	}
 	public JRadioButton getSpDExcludeRB(){	return spd_exclude_rb;	}
 	public JRadioButton getSpeExcludeRB(){	return spe_exclude_rb;	}
-	
 	public JRadioButton getHPOptionalRB(){	return hp_optional_rb;	}
 	public JRadioButton getAtkOptionalRB(){	return atk_optional_rb;	}
 	public JRadioButton getDefOptionalRB(){	return def_optional_rb;	}
 	public JRadioButton getSpAOptionalRB(){	return spa_optional_rb;	}
 	public JRadioButton getSpDOptionalRB(){	return spd_optional_rb;	}
 	public JRadioButton getSpeOptionalRB(){	return spe_optional_rb;	}
+	
+	public JCheckBox getEverstoneCheckBox(){	return everstone_checkbox;	}
 	
 	// Helper method
 	private JRadioButton createJRadioButton( String text, boolean selected, String command){
