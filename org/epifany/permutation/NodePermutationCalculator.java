@@ -61,6 +61,46 @@ public class NodePermutationCalculator extends PermutationCalculator {
 		super( ncc);
 		nodes = new ArrayList( ncc.nodes);
 	}
+	
+	public boolean expandReplacePermutationsValues( List<List<Integer>> indices_a, List<List<Integer>> indices_b){
+		if( indices_a == null || indices_b == null)
+			return false;
+		// Check to see if all sizes are the same
+		if( indices_a.size() != indices_b.size() && indices_a.size() != nodes.size())
+			return false;
+		
+		int height = 0;
+		for( int n = 0; n < nodes.size(); n++){
+			expandReplacePermutationValues( nodes.get(n), height, indices_a.get(n), indices_b.get(n));
+		}
+		
+		return true;
+	}
+	
+	private void expandReplacePermutationValues( Node node, int index, List<Integer> indices_a, List<Integer> indices_b){
+		if( index >= indices_a.size())
+			return;
+		// Get elements of soon to be parent
+		int[] elements_p = node.getElements();
+		// Copy elememts for left and right child
+		int[] elements_l = new int[elements_p.length];
+		System.arraycopy(elements_p, 0, elements_l, 0, elements_p.length);
+		int[] elements_r = new int[elements_p.length];
+		System.arraycopy(elements_p, 0, elements_r, 0, elements_p.length);
+		// Replace respective values
+		elements_l[index] = indices_a.get(index);
+		elements_r[index] = indices_b.get(index);
+		// Create left and right child
+		Node leftChild = new Node( node, elements_l);
+		Node rightChild = new Node( node, elements_r);
+		
+		node.setLeftChild( leftChild);
+		node.setRightChild( rightChild);
+		// Do the same for left and right child
+		expandReplacePermutationValues( leftChild, index+1, indices_a, indices_b);
+		expandReplacePermutationValues( rightChild, index+1, indices_a, indices_b);
+	}
+	
 	public boolean splitNodes( int[] split1, int[] split2){
 		if( split1.length != split2.length)
 			return false;
@@ -161,6 +201,20 @@ public class NodePermutationCalculator extends PermutationCalculator {
 			appendElement( target.getLeftChild(), e);
 			appendElement( target.getRightChild(), e);
 		}
+	}
+	
+	// Method for adding nodes
+	// Note: use this method with caution, it directly adds additional nodes
+	// without regard for the elements & limit of the calculator it is getting the nodes from
+	public boolean addNodes( NodePermutationCalculator npc){
+		if( npc == null)
+			return false;
+		for( int i = 0; i < npc.size(); i++){
+			permutations.add( npc.get(i));
+			nodes.add( npc.getNode(i));
+		}
+		
+		return true;
 	}
 	
 	// Returns the node associated with the ith permutation

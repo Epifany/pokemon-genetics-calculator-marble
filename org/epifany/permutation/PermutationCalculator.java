@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class PermutationCalculator {
 	// This is where we'll hold all our set of permutations
-	protected final List<List<Integer>> permutations;
+	protected List<List<Integer>> permutations;
 	// The elements used for computing permutations
 	protected final int[] elements;
 	// The amount of elements each set (of permutations) may contain
