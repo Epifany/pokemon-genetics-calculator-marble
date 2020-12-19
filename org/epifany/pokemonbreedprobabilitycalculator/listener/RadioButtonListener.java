@@ -30,7 +30,7 @@ public class RadioButtonListener implements ItemListener {
 			presenter.updateRBStateProbability();
 		}
 		else if( command.equals("Show Percentage")){
-			presenter.updateCBPercentage(flag);
+			presenter.updateRBPercentage(flag);
 			presenter.updateRBStateProbability();
 		}
 		else if(flag){
