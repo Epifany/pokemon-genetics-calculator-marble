@@ -25,8 +25,14 @@ public class CheckBoxListener implements ItemListener {
 		String command = button.getActionCommand();
 		boolean flag = ( ie.getStateChange() == ItemEvent.SELECTED);
 		System.out.println( command + " " + flag);
-		presenter.updateFlagState( command, flag);
-		presenter.updateFlagStateKey();
+		
+		if( command.equals("Correct Nature?")){
+			presenter.updateCBEverstone(flag);
+		}
+		else{
+			presenter.updateFlagState(command, flag);
+			presenter.updateFlagStateKey();
+		}
 		presenter.updateFlagStateProbability();
 	}
 }
