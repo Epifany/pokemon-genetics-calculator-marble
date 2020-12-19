@@ -4,7 +4,9 @@
 
 package org.epifany.pokemonbreedprobabilitycalculator.gui;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
@@ -19,18 +21,34 @@ public class CheckBoxContainer {
 	protected final JCheckBox spd_checkbox;
 	protected final JCheckBox spe_checkbox;
 	
+	protected final JCheckBox everstone_checkbox;
+	
 	public CheckBoxContainer( String hp, String atk, String def,
-							String spa, String spd, String spe){
+							String spa, String spd, String spe, String everstoneText){
 		hp_checkbox = new JCheckBox(hp);
 		atk_checkbox = new JCheckBox(atk);
 		def_checkbox = new JCheckBox(def);
 		spa_checkbox = new JCheckBox(spa);
 		spd_checkbox = new JCheckBox(spd);
 		spe_checkbox = new JCheckBox(spe);
+		everstone_checkbox = new JCheckBox(everstoneText);
+		everstone_checkbox.setAlignmentX(Component.LEFT_ALIGNMENT);
+	}
+	
+	public JPanel createMyDefaultPanel(){
+		JPanel panel = new JPanel();
+		panel.setLayout( new BoxLayout( panel, BoxLayout.Y_AXIS));
+		
+		panel.add(everstone_checkbox);
+		JPanel temp = createCheckBoxPanel();
+		temp.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panel.add(temp);
+		
+		return panel;
 	}
 	
 	// Default panel for CheckBox GUI
-	public JPanel createCheckBoxPanel(){
+	private JPanel createCheckBoxPanel(){
 		// A panel for our check boxes
 		JPanel panel = new JPanel( new FlowLayout());
 		panel.add( hp_checkbox);
@@ -48,4 +66,5 @@ public class CheckBoxContainer {
 	public JCheckBox getSpACheckBox(){	return spa_checkbox;	}
 	public JCheckBox getSpDCheckBox(){	return spd_checkbox;	}
 	public JCheckBox getSpeCheckBox(){	return spe_checkbox;	}
+	public JCheckBox getEverstoneCheckBox(){	return everstone_checkbox;	}
 }
