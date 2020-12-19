@@ -98,8 +98,6 @@ public class PokemonPresenter {
 		manager.getProbRBManager().clearProbabilities();
 		manager.getCalcManager().setEverstone(true);
 		manager.getCalcManager().setNoItem(false);
-		manager.getProbCBManager().setEverstone(true);
-		manager.getProbRBManager().setEverstone(true);
 		started = false;
 	}
 	
@@ -282,11 +280,6 @@ public class PokemonPresenter {
 		manager.getProbCBManager().setEverstone(flag);
 	}
 	
-	public void reaffirmCBEverstone(){
-		manager.getProbCBManager().setEverstone(manager.getProbCBManager().hasEverstone());
-	System.out.println( "CBManager everstone: " + manager.getProbCBManager().hasEverstone());
-	}
-	
 	// This method is called whenever a radiobutton state is changed
 	public void updateRBState( String text, boolean flag){
 		if( flag){
@@ -400,9 +393,5 @@ public class PokemonPresenter {
 	
 	public void updateRBEverstone( boolean flag){
 		manager.getProbRBManager().setEverstone(flag);
-	}
-	
-	public void readdirmRBEverstone(){
-		manager.getProbRBManager().setEverstone(manager.getProbRBManager().hasEverstone());
 	}
 }
