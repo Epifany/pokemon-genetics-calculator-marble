@@ -68,10 +68,10 @@ public class PokemonPresenter {
 				list_b.equals( PokemonCommand.ITEM_POWERANKLET_TEXT)	? CalcType.POWERSPE : CalcType.DEFAULT;
 		calcManager.setCaclTypeB( type);
 		
-		// By default for this program, everstone was set to false
+		// By default for this program, everstone was set to true
 		if( list_a.equals(PokemonCommand.ITEM_EVERSTONE_TEXT) || list_b.equals(PokemonCommand.ITEM_EVERSTONE_TEXT))
 			calcManager.setEverstone(true);
-		// By default for this program, noitem was set to true
+		// By default for this program, noitem was set to false
 		if( !list_a.equals(PokemonCommand.ITEM_NONE_TEXT) && !list_b.equals(PokemonCommand.ITEM_NONE_TEXT))
 			calcManager.setNoItem(false);
 		
@@ -94,8 +94,10 @@ public class PokemonPresenter {
 	public void reset(){
 		manager.getProbCBManager().clearProbabilities();
 		manager.getProbRBManager().clearProbabilities();
-		manager.getCalcManager().setEverstone(false);
-		manager.getCalcManager().setNoItem(true);
+		manager.getCalcManager().setEverstone(true);
+		manager.getCalcManager().setNoItem(false);
+		manager.getProbCBManager().setEverstone(true);
+		manager.getProbRBManager().setEverstone(true);
 		started = false;
 	}
 	
@@ -130,6 +132,7 @@ public class PokemonPresenter {
 		cbContainer.getSpACheckBox().setSelected( false);
 		cbContainer.getSpDCheckBox().setSelected( false);
 		cbContainer.getSpeCheckBox().setSelected( false);
+		cbContainer.getEverstoneCheckBox().setSelected(true);
 		// Reset labels
 		view.getHighLowA().setHighInclusiveText( "0 / 0");
 		view.getHighLowA().setHighExclusiveText( "0 / 0");
@@ -151,6 +154,7 @@ public class PokemonPresenter {
 		rbContainer.getSpAIncludeRB().setSelected( true);
 		rbContainer.getSpDIncludeRB().setSelected( true);
 		rbContainer.getSpeIncludeRB().setSelected( true);
+		rbContainer.getEverstoneCheckBox().setSelected(true);
 		// Reset label
 		view.getRBLabel().setText( "0 / 0");
 	}

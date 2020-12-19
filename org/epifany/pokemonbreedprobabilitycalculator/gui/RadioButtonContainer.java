@@ -68,6 +68,7 @@ public class RadioButtonContainer {
 		
 		everstone_checkbox = new JCheckBox(everstoneText);
 		everstone_checkbox.setAlignmentX(Component.LEFT_ALIGNMENT);
+		everstone_checkbox.setSelected(true);
 		
 		ButtonGroup hp_group = new ButtonGroup();
 		ButtonGroup atk_group = new ButtonGroup();

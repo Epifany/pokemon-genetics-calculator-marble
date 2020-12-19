@@ -33,6 +33,7 @@ public class CheckBoxContainer {
 		spe_checkbox = new JCheckBox(spe);
 		everstone_checkbox = new JCheckBox(everstoneText);
 		everstone_checkbox.setAlignmentX(Component.LEFT_ALIGNMENT);
+		everstone_checkbox.setSelected(true);
 	}
 	
 	public JPanel createMyDefaultPanel(){

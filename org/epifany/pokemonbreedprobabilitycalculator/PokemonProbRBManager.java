@@ -37,6 +37,7 @@ public class PokemonProbRBManager {
 	public PokemonProbRBManager( PokemonBreedManager b){
 		breed = b;
 		probabilities = new HashMap();
+		everstone = true;
 		setDefaultFlags();
 	}
 	
@@ -54,6 +55,7 @@ public class PokemonProbRBManager {
 		need_spa = p.need_spa;
 		need_spd = p.need_spd;
 		need_spe = p.need_spe;
+		everstone = p.everstone;
 		breed = p.breed;
 		probabilities = new HashMap( p.probabilities);
 	}

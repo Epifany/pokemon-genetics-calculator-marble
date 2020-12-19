@@ -36,6 +36,7 @@ public class PokemonProbCBManager {
 	public PokemonProbCBManager( PokemonBreedManager b){
 		breed = b;
 		probabilities = new HashMap();
+		everstone = true;
 	}
 	
 	// Copy Constructor method
@@ -46,6 +47,7 @@ public class PokemonProbCBManager {
 		flag_spa = p.flag_spa;
 		flag_spd = p.flag_spd;
 		flag_spe = p.flag_spe;
+		everstone = p.everstone;
 		breed = p.breed;
 		probabilities = new HashMap( p.probabilities);
 	}
