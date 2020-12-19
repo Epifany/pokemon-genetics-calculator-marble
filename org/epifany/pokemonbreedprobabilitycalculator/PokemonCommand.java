@@ -42,7 +42,7 @@ public class PokemonCommand {
 	public static final String PERFECT_5 = "At least 5 perfect stats";
 	public static final String PERFECT_6 = "At least 6 perfect stats";
 	
-	public static final String ITEM_NONE_TEXT = "No Item";
+	public static final String ITEM_NONE_TEXT = "--";
 	public static final String ITEM_EVERSTONE_TEXT = "Everstone";
 	public static final String ITEM_POWERBRACER_TEXT = "Power Bracer -- (Atk)";
 	public static final String ITEM_POWERBELT_TEXT = "Power Belt -- (Def)";
