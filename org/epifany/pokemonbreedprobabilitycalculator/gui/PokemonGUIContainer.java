@@ -81,12 +81,13 @@ public class PokemonGUIContainer {
 			PokemonHelper.SPA_TEXT,
 			PokemonHelper.SPD_TEXT,
 			PokemonHelper.SPE_TEXT,
-			"Correct Nature?");
+			"Correct Nature?", "Show Percentage");
 		highlow_a = new HighLowContainer("A");
 		highlow_b = new HighLowContainer("B");
 		highlow_ab = new HighLowContainer("A & B");
 		highlow_perfect = new JLabel("0 / 0");
-		radioButtonContainer = new RadioButtonContainer( "Perfect", "Not perfect", "Either", "Correct Nature?");
+		radioButtonContainer = new RadioButtonContainer( "Perfect", "Not perfect", "Either",
+				"Correct Nature?", "Show Percentage");
 		rbLabel = new JLabel("0 / 0");
 		rbLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 	}

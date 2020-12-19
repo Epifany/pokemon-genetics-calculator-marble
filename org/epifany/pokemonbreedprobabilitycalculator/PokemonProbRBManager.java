@@ -26,8 +26,9 @@ public class PokemonProbRBManager {
 	private boolean need_spa;
 	private boolean need_spd;
 	private boolean need_spe;
-	
+	// Some other booleans for different states
 	private boolean everstone;
+	private boolean percentage;
 	// The breed manager associated with the probabilities we'll be computing
 	private final PokemonBreedManager breed;
 	// Optimization
@@ -37,8 +38,19 @@ public class PokemonProbRBManager {
 	public PokemonProbRBManager( PokemonBreedManager b){
 		breed = b;
 		probabilities = new HashMap();
+		flag_hp = true;
+		flag_atk = true;
+		flag_def = true;
+		flag_spa = true;
+		flag_spd = true;
+		flag_spe = true;
+		need_hp = true;
+		need_atk = true;
+		need_def = true;
+		need_spa = true;
+		need_spd = true;
+		need_spe = true;
 		everstone = true;
-		setDefaultFlags();
 	}
 	
 	// Copy Constructor method
@@ -56,23 +68,9 @@ public class PokemonProbRBManager {
 		need_spd = p.need_spd;
 		need_spe = p.need_spe;
 		everstone = p.everstone;
+		percentage = p.percentage;
 		breed = p.breed;
 		probabilities = new HashMap( p.probabilities);
-	}
-	
-	private void setDefaultFlags(){
-		flag_hp = true;
-		flag_atk = true;
-		flag_def = true;
-		flag_spa = true;
-		flag_spd = true;
-		flag_spe = true;
-		need_hp = true;
-		need_atk = true;
-		need_def = true;
-		need_spa = true;
-		need_spd = true;
-		need_spe = true;
 	}
 	
 	public void updateProbabilities(){
@@ -183,6 +181,7 @@ public class PokemonProbRBManager {
 	public void setNeedSpe( boolean flag){	need_spe = flag;	}
 	
 	public void setEverstone( boolean e){	everstone = e;	}
+	public void setPercentage(boolean p){	percentage = p;	}
 	
 	public boolean flagHp(){	return flag_hp;	}
 	public boolean flagAtk(){	return flag_atk;	}
@@ -199,6 +198,7 @@ public class PokemonProbRBManager {
 	public boolean needSpe(){	return need_spe;	}
 	
 	public boolean hasEverstone(){	return everstone;	}
+	public boolean showPercentage(){	return percentage;	}
 	
 	public PokemonBreedManager getBreedManager(){	return breed;	}
 	

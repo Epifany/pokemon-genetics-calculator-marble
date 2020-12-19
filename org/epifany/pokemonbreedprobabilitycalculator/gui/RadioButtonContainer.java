@@ -43,8 +43,10 @@ public class RadioButtonContainer {
 	protected final JRadioButton spe_optional_rb;
 	
 	protected final JCheckBox everstone_checkbox;
+	protected final JCheckBox percentage_checkbox;
 	
-	public RadioButtonContainer( String include, String exclude, String optional, String everstoneText){
+	public RadioButtonContainer( String include, String exclude, String optional,
+			String everstoneText, String percentageText){
 		hp_include_rb = createJRadioButton( include, true, PokemonCommand.HP_INC);
 		atk_include_rb = createJRadioButton( include, true, PokemonCommand.ATK_INC);
 		def_include_rb = createJRadioButton( include, true, PokemonCommand.DEF_INC);
@@ -69,6 +71,9 @@ public class RadioButtonContainer {
 		everstone_checkbox = new JCheckBox(everstoneText);
 		everstone_checkbox.setAlignmentX(Component.LEFT_ALIGNMENT);
 		everstone_checkbox.setSelected(true);
+		
+		percentage_checkbox = new JCheckBox(percentageText);
+		percentage_checkbox.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
 		ButtonGroup hp_group = new ButtonGroup();
 		ButtonGroup atk_group = new ButtonGroup();
@@ -103,6 +108,21 @@ public class RadioButtonContainer {
 	}
 	
 	public JPanel createMyDefaultPanel(){
+		JPanel panel = new JPanel( new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 4;
+		panel.add( everstone_checkbox, c);
+		c.gridx += c.gridwidth;
+		panel.add( percentage_checkbox, c);
+		c.gridy = 1;
+		c.gridx = 0;
+		c.gridwidth = 8;
+		panel.add( createRadioButtonPanel(), c);
+		
+		return panel;
+		/*
 		JPanel panel = new JPanel();
 		panel.setLayout( new BoxLayout( panel, BoxLayout.Y_AXIS));
 		
@@ -112,6 +132,7 @@ public class RadioButtonContainer {
 		panel.add(temp);
 		
 		return panel;
+		*/
 	}
 	
 	// Default panel for RadioButton gui
@@ -204,6 +225,7 @@ public class RadioButtonContainer {
 	public JRadioButton getSpeOptionalRB(){	return spe_optional_rb;	}
 	
 	public JCheckBox getEverstoneCheckBox(){	return everstone_checkbox;	}
+	public JCheckBox getPercentageCheckBox(){	return percentage_checkbox;	}
 	
 	// Helper method
 	private JRadioButton createJRadioButton( String text, boolean selected, String command){

@@ -6,7 +6,8 @@ package org.epifany.pokemonbreedprobabilitycalculator.gui;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
@@ -22,9 +23,11 @@ public class CheckBoxContainer {
 	protected final JCheckBox spe_checkbox;
 	
 	protected final JCheckBox everstone_checkbox;
+	protected final JCheckBox percentage_checkbox;
 	
 	public CheckBoxContainer( String hp, String atk, String def,
-							String spa, String spd, String spe, String everstoneText){
+							String spa, String spd, String spe,
+							String everstoneText, String percentageText){
 		hp_checkbox = new JCheckBox(hp);
 		atk_checkbox = new JCheckBox(atk);
 		def_checkbox = new JCheckBox(def);
@@ -34,16 +37,23 @@ public class CheckBoxContainer {
 		everstone_checkbox = new JCheckBox(everstoneText);
 		everstone_checkbox.setAlignmentX(Component.LEFT_ALIGNMENT);
 		everstone_checkbox.setSelected(true);
+		percentage_checkbox = new JCheckBox(percentageText);
+		percentage_checkbox.setAlignmentX(Component.LEFT_ALIGNMENT);
 	}
 	
 	public JPanel createMyDefaultPanel(){
-		JPanel panel = new JPanel();
-		panel.setLayout( new BoxLayout( panel, BoxLayout.Y_AXIS));
-		
-		panel.add(everstone_checkbox);
-		JPanel temp = createCheckBoxPanel();
-		temp.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panel.add(temp);
+		JPanel panel = new JPanel( new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 4;
+		panel.add( everstone_checkbox, c);
+		c.gridx += c.gridwidth;
+		panel.add( percentage_checkbox, c);
+		c.gridy = 1;
+		c.gridx = 0;
+		c.gridwidth = 10;
+		panel.add( createCheckBoxPanel(), c);
 		
 		return panel;
 	}
@@ -68,4 +78,5 @@ public class CheckBoxContainer {
 	public JCheckBox getSpDCheckBox(){	return spd_checkbox;	}
 	public JCheckBox getSpeCheckBox(){	return spe_checkbox;	}
 	public JCheckBox getEverstoneCheckBox(){	return everstone_checkbox;	}
+	public JCheckBox getPercentageCheckBox(){	return percentage_checkbox;	}
 }

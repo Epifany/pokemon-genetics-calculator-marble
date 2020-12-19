@@ -24,8 +24,9 @@ public class PokemonProbCBManager {
 	private boolean flag_spa;
 	private boolean flag_spd;
 	private boolean flag_spe;
-	
+	// Some other booleans for other states
 	private boolean everstone;
+	private boolean percentage;
 	// The breed manager associated with the probabilities we'll be computing
 	private final PokemonBreedManager breed;
 	// Optimization
@@ -48,6 +49,7 @@ public class PokemonProbCBManager {
 		flag_spd = p.flag_spd;
 		flag_spe = p.flag_spe;
 		everstone = p.everstone;
+		percentage = p.percentage;
 		breed = p.breed;
 		probabilities = new HashMap( p.probabilities);
 	}
@@ -106,40 +108,6 @@ public class PokemonProbCBManager {
 			System.out.println( "Key already exists: " + currentKey);
 		}
 	}
-	
-	public void clearProbabilities(){	probabilities.clear();	}
-	
-	public void updateCurrentKey(){
-		String hp = flag_hp ? "t" : "f";
-		String atk = flag_atk ? "t" : "f";
-		String def = flag_def ? "t" : "f";
-		String spa = flag_spa ? "t" : "f";
-		String spd = flag_spd ? "t" : "f";
-		String spe = flag_spe ? "t" : "f";
-		currentKey = hp + atk + def + spa + spd + spe;
-	}
-	
-	public void setFlagHp( boolean flag){	flag_hp = flag;	}
-	public void setFlagAtk( boolean flag){	flag_atk = flag;	}
-	public void setFlagDef( boolean flag){	flag_def = flag;	}
-	public void setFlagSpA( boolean flag){	flag_spa = flag;	}
-	public void setFlagSpD( boolean flag){	flag_spd = flag;	}
-	public void setFlagSpe( boolean flag){	flag_spe = flag;	}
-	
-	public void setEverstone( boolean e){	everstone = e;	}
-	
-	public boolean flagHp(){	return flag_hp;	}
-	public boolean flagAtk(){	return flag_atk;	}
-	public boolean flagDef(){	return flag_def;	}
-	public boolean flagSpA(){	return flag_spa;	}
-	public boolean flagSpD(){	return flag_spd;	}
-	public boolean flagSpe(){	return flag_spe;	}
-	
-	public boolean hasEverstone(){	return everstone;	}
-	
-	public PokemonBreedManager getBreedManager(){	return breed;	}
-	public PokemonHLABManager getSWABAt( String key){	return probabilities.get(key);	}
-	public String getCurrentKey(){	return currentKey;	}
 	
 	// Traverses through a node for computing a Pokemon Fraction
 	private Fraction calcFraction( Node target, int[] source_ivs){
@@ -210,7 +178,7 @@ public class PokemonProbCBManager {
 		return new Fraction( num, den);
 	}
 	
-	// Returns an array, of the same length as a & b, containing the respective maximum values between a & b
+	// Returns an array, of the same length as a & b, containing the respective ith maximum values between a & b
 	private int[] max( int[] a, int[] b){
 		int[] result = new int[a.length];
 		for( int i = 0; i < result.length; i++){
@@ -219,7 +187,7 @@ public class PokemonProbCBManager {
 		return result;
 	}
 	
-	// Returns an array, of the same length as a & b, containing the respective minimum values between a & b
+	// Returns an array, of the same length as a & b, containing the respective ith minimum values between a & b
 	private int[] min( int[] a, int[] b){
 		int[] result = new int[a.length];
 		for( int i = 0; i < result.length; i++){
@@ -227,6 +195,42 @@ public class PokemonProbCBManager {
 		}
 		return result;
 	}
+	
+	public void updateCurrentKey(){
+		String hp = flag_hp ? "t" : "f";
+		String atk = flag_atk ? "t" : "f";
+		String def = flag_def ? "t" : "f";
+		String spa = flag_spa ? "t" : "f";
+		String spd = flag_spd ? "t" : "f";
+		String spe = flag_spe ? "t" : "f";
+		currentKey = hp + atk + def + spa + spd + spe;
+	}
+	
+	public void clearProbabilities(){	probabilities.clear();	}
+	
+	public void setFlagHp( boolean flag){	flag_hp = flag;	}
+	public void setFlagAtk( boolean flag){	flag_atk = flag;	}
+	public void setFlagDef( boolean flag){	flag_def = flag;	}
+	public void setFlagSpA( boolean flag){	flag_spa = flag;	}
+	public void setFlagSpD( boolean flag){	flag_spd = flag;	}
+	public void setFlagSpe( boolean flag){	flag_spe = flag;	}
+	
+	public void setEverstone( boolean e){	everstone = e;	}
+	public void setPercentage(boolean p){	percentage = p;	}
+	
+	public boolean flagHp(){	return flag_hp;	}
+	public boolean flagAtk(){	return flag_atk;	}
+	public boolean flagDef(){	return flag_def;	}
+	public boolean flagSpA(){	return flag_spa;	}
+	public boolean flagSpD(){	return flag_spd;	}
+	public boolean flagSpe(){	return flag_spe;	}
+	
+	public boolean hasEverstone(){	return everstone;	}
+	public boolean showPercentage(){	return percentage;	}
+	
+	public PokemonBreedManager getBreedManager(){	return breed;	}
+	public PokemonHLABManager getSWABAt( String key){	return probabilities.get(key);	}
+	public String getCurrentKey(){	return currentKey;	}
 	
 	public enum PkmnFractionMode{
 		DEFAULT,
