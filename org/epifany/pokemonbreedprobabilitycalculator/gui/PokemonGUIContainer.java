@@ -116,7 +116,7 @@ public class PokemonGUIContainer {
 		temp = createCheckBoxPanel( "Comparisons For The Curiously Inclined");
 		temp.setAlignmentX(Component.LEFT_ALIGNMENT);
 		// These numbers were determined after finding out the size of this panel through debugging...
-		temp.setPreferredSize( new Dimension( 355, 290));
+		temp.setPreferredSize( new Dimension( 355, 310));
 		outputPanel.add( temp);
 		
 		// Note: RadioButton and CheckBox panels are the largest sized "active" panels
