@@ -1,6 +1,7 @@
 /**
  * Copyright 2020, Stephen Gung, All rights reserved
  */
+
 package org.epifany.run;
 
 import org.epifany.pokemonbreedprobabilitycalculator.PokemonApplication;
@@ -12,10 +13,10 @@ import org.epifany.pokemonbreedprobabilitycalculator.listener.CheckBoxListener;
 import org.epifany.pokemonbreedprobabilitycalculator.listener.RadioButtonListener;
 
 /**
- * A run class
+ *
  * @author StephenGung
  */
-public class PokemonIVMarble {
+public class PokemonIV_5 {
 
 	/**
 	 * @param args the command line arguments
@@ -39,6 +40,7 @@ public class PokemonIVMarble {
 			container.getCheckBoxContainer().getSpACheckBox().addItemListener( cbListener);
 			container.getCheckBoxContainer().getSpDCheckBox().addItemListener( cbListener);
 			container.getCheckBoxContainer().getSpeCheckBox().addItemListener( cbListener);
+			container.getCheckBoxContainer().getEverstoneCheckBox().addItemListener( cbListener);
 			
 			RadioButtonListener rbListener = new RadioButtonListener( presenter);
 			container.getRBContainer().getHPIncludeRB().addItemListener( rbListener);
@@ -59,6 +61,7 @@ public class PokemonIVMarble {
 			container.getRBContainer().getSpeIncludeRB().addItemListener( rbListener);
 			container.getRBContainer().getSpeOptionalRB().addItemListener( rbListener);
 			container.getRBContainer().getSpeExcludeRB().addItemListener( rbListener);
+			container.getRBContainer().getEverstoneCheckBox().addItemListener( rbListener);
 		}
-	}	
+	}
 }
