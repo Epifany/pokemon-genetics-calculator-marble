@@ -29,6 +29,9 @@ public class CheckBoxListener implements ItemListener {
 		if( command.equals("Correct Nature?")){
 			presenter.updateCBEverstone(flag);
 		}
+		else if( command.equals("Show Percentage")){
+			presenter.updateCBPercentage(flag);
+		}
 		else{
 			presenter.updateFlagState(command, flag);
 			presenter.updateFlagStateKey();
