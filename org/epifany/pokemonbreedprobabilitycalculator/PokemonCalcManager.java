@@ -22,11 +22,14 @@ public class PokemonCalcManager {
 	private boolean noitem;
 	private boolean everstone;
 	
+	private boolean slotApproach;
+	
 	private final HashMap<String, NodePermutationCalculator> calculators;
 	private String currentKey;
 	
 	public PokemonCalcManager(){
 		calculators = new HashMap();
+		slotApproach = true;
 	}
 	
 	public void updateCalculators(){
@@ -34,8 +37,7 @@ public class PokemonCalcManager {
 		if( calculators.get( currentKey) == null){
 			System.out.println( "New key: " + currentKey);
 			// Generate a new calculator here
-			//NodePermutationCalculator calc_new = createNewCalculator();
-			NodePermutationCalculator calc_new = slotNewCalculator();
+			NodePermutationCalculator calc_new = (slotApproach) ? slotNewCalculator() : marbleNewCalculator();
 			calculators.put( currentKey, calc_new);
 		}/*
 		else{
@@ -248,19 +250,15 @@ public class PokemonCalcManager {
 				calculator.appendElement( calculator.getNode(i), priority);
 			}
 		}
-		// One of the Pokemon is holding Destiny Knot
-		else if( currentKey.equals("dd")
-		|| currentKey.equals("dn")
-		|| currentKey.equals("nd")){
-			// Destiny Knot sets it so that the child will inherit 5 IVs
-			calculator = new NodePermutationCalculator( indices, 5);
-			calculator.splitNodes( split_a, split_b);
-		}
 		else{
-			// Child will inherit 3 IVs
-			calculator = new NodePermutationCalculator( indices, 3);
+			// Is any of them holding Destiny Knot?
+			numElements =	currentKey.equals("dd") ? 5 :
+							currentKey.equals("dn") ? 5 :
+							currentKey.equals("nd") ? 5 : 3;
+			calculator = new NodePermutationCalculator( indices, numElements);
 			calculator.splitNodes( split_a, split_b);
 		}
+		
 		return calculator;
 	}
 	
@@ -346,6 +344,7 @@ public class PokemonCalcManager {
 	public void setCaclTypeB( CalcType type){	type_b = type;	}
 	public void setEverstone( boolean e){	everstone = e;	}
 	public void setNoItem( boolean i){	noitem = i;	}
+	public void setSlotApproach( boolean sa){	slotApproach = sa;	}
 	
 	public NodePermutationCalculator getCalculatorAt( String key){
 		return calculators.get(key);
@@ -353,6 +352,8 @@ public class PokemonCalcManager {
 	
 	public boolean hasEverstone(){	return everstone;	}
 	public boolean hasNoItem(){	return noitem;	}
+	public boolean usingSlotApproach(){	return slotApproach;	}
+	public boolean usingMarbleApproach(){	return !slotApproach;	}
 	public String getCurrentKey(){	return currentKey;	}
 	
 	public enum CalcType{

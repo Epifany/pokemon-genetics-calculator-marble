@@ -4,6 +4,7 @@
 
 package org.epifany.pokemonbreedprobabilitycalculator;
 
+import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +22,22 @@ import org.epifany.pokemonbreedprobabilitycalculator.gui.PokemonGUIContainer;
  */
 public class PokemonApplication {
 	private JFrame frame;
+	private JMenuItem exit;
+	private JMenuItem slotApproach;
+	private JMenuItem marbleApproach;
 	
-	private final List<PokemonGUIContainer> containers;
+	private final List<PokemonGUIContainer> slotContainers;
+	private final List<PokemonGUIContainer> marbleContainers;
+	
+	private JPanel panel;
 	
 	public PokemonApplication(){
-		containers = new ArrayList();
+		slotContainers = new ArrayList();
+		marbleContainers = new ArrayList();
 		// 3 should be enough calculators...
 		for( int i = 0; i < 3; i++){
-			PokemonGUIContainer gui = new PokemonGUIContainer();
-			containers.add(gui);
+			slotContainers.add( new PokemonGUIContainer());
+			marbleContainers.add( new PokemonGUIContainer());
 		}
 	}
 	
@@ -43,34 +51,57 @@ public class PokemonApplication {
 			JMenuBar menuBar = new JMenuBar();
 			// Create a File menu
 			JMenu fileMenu = createJMenu( "File", KeyEvent.VK_F);
-			fileMenu.add( createJMenuItem( "Exit", 0, 0));
+			exit = createJMenuItem( "Exit", 0, 0);
+			fileMenu.add( exit);
 			menuBar.add( fileMenu);
+			
 			// Create a Options menu
-			//JMenu optionsMenu = createJMenu( "Options", KeyEvent.VK_O);
-			//menuBar.add( optionsMenu);
+			JMenu optionsMenu = createJMenu( "Options", KeyEvent.VK_O);
+			slotApproach = createJMenuItem("Slot Approach", 0, 0);
+			marbleApproach = createJMenuItem("Marble Approach", 0, 0);
+			optionsMenu.add(slotApproach);
+			optionsMenu.add(marbleApproach);
+			menuBar.add( optionsMenu);
+			
 			// Create a Help menu
 			//JMenu helpMenu = createJMenu( "Help", KeyEvent.VK_H);
 			//menuBar.add( helpMenu);
 			// Set this bar for our frame
 			frame.setJMenuBar( menuBar);
 			
-			//Dimension d = new Dimension( 600, 500);
+			JTabbedPane slotPane = createTabbedPane(slotContainers, "Slot");
+			JTabbedPane marblePane = createTabbedPane(marbleContainers, "Marble");
 			
-			JTabbedPane tabbedPane = new JTabbedPane();
-			for( int i = 0; i < containers.size(); i++){
-				JPanel panel = containers.get(i).createDefaultPanel();
-				//panel.setPreferredSize(d);
-				tabbedPane.addTab("Calculator " + (i+1), panel);
-			}
+			panel = new JPanel( new CardLayout());
+			panel.add(slotPane, "Slot Approach");
+			panel.add(marblePane, "Marble Approach");
 
-			frame.add( tabbedPane);
+			frame.add( panel);
 			frame.pack();
 			frame.setVisible( true);
 	}
 	
-	public List<PokemonGUIContainer> getContainers(){
-		return containers;
+	public JMenuItem getExitMI(){	return exit;	}
+	public JMenuItem getSlotApproachMI(){	return slotApproach;	}
+	public JMenuItem getMarbleApproachMI(){	return marbleApproach;	}
+	
+	public List<PokemonGUIContainer> getSlotContainers(){
+		return slotContainers;
 	}
+	public List<PokemonGUIContainer> getMarbleContainers(){
+		return marbleContainers;
+	}
+	public JPanel getPanel(){	return panel;	}
+	
+	private JTabbedPane createTabbedPane( List<PokemonGUIContainer> containers, String name){
+		JTabbedPane tabbedPane = new JTabbedPane();
+		for( int i = 0; i < containers.size(); i++){
+			JPanel temp = containers.get(i).createDefaultPanel();
+			tabbedPane.addTab(name + " " + (i+1), temp);
+		}
+		return tabbedPane;
+	}
+	
 	
 	// Helper method
 	private JMenu createJMenu( String text, int key){

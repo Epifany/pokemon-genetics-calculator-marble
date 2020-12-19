@@ -4,16 +4,18 @@
 
 package org.epifany.run;
 
+import java.util.List;
 import org.epifany.pokemonbreedprobabilitycalculator.PokemonApplication;
 import org.epifany.pokemonbreedprobabilitycalculator.PokemonManager;
 import org.epifany.pokemonbreedprobabilitycalculator.PokemonPresenter;
 import org.epifany.pokemonbreedprobabilitycalculator.gui.PokemonGUIContainer;
 import org.epifany.pokemonbreedprobabilitycalculator.listener.ButtonListener;
 import org.epifany.pokemonbreedprobabilitycalculator.listener.CheckBoxListener;
+import org.epifany.pokemonbreedprobabilitycalculator.listener.MenuItemListener;
 import org.epifany.pokemonbreedprobabilitycalculator.listener.RadioButtonListener;
 
 /**
- *
+ * "I'm finally at the starting line of the race to my dreams"
  * @author StephenGung
  */
 public class PokemonIV_5 {
@@ -24,10 +26,24 @@ public class PokemonIV_5 {
 	public static void main(String[] args) {
 		PokemonApplication application = new PokemonApplication();
 		application.createUI();
+		// Slot approach
+		listen( application.getSlotContainers(), true);
+		// Marble approach
+		listen( application.getMarbleContainers(), false);
 		
+		MenuItemListener mil = new MenuItemListener(application);
+		application.getExitMI().addActionListener(mil);
+		application.getSlotApproachMI().addActionListener(mil);
+		application.getMarbleApproachMI().addActionListener(mil);
+	}
+	
+	public static void listen( List<PokemonGUIContainer> containers, boolean approach){
 		// Add presenters and listeners for all containers
-		for( PokemonGUIContainer container : application.getContainers()) {
-			PokemonPresenter presenter = new PokemonPresenter( new PokemonManager(), container);
+		for ( PokemonGUIContainer container : containers) {
+			PokemonManager pm = new PokemonManager();
+			// Set the type of approach
+			pm.getCalcManager().setSlotApproach(approach);
+			PokemonPresenter presenter = new PokemonPresenter( pm, container);
 			
 			ButtonListener bListener = new ButtonListener( presenter);
 			container.getCalculateButton().addActionListener( bListener);
@@ -66,4 +82,5 @@ public class PokemonIV_5 {
 			container.getRBContainer().getPercentageCheckBox().addItemListener( rbListener);
 		}
 	}
+	
 }
