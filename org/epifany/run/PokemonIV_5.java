@@ -41,6 +41,7 @@ public class PokemonIV_5 {
 			container.getCheckBoxContainer().getSpDCheckBox().addItemListener( cbListener);
 			container.getCheckBoxContainer().getSpeCheckBox().addItemListener( cbListener);
 			container.getCheckBoxContainer().getEverstoneCheckBox().addItemListener( cbListener);
+			container.getCheckBoxContainer().getPercentageCheckBox().addItemListener( cbListener);
 			
 			RadioButtonListener rbListener = new RadioButtonListener( presenter);
 			container.getRBContainer().getHPIncludeRB().addItemListener( rbListener);
@@ -62,6 +63,7 @@ public class PokemonIV_5 {
 			container.getRBContainer().getSpeOptionalRB().addItemListener( rbListener);
 			container.getRBContainer().getSpeExcludeRB().addItemListener( rbListener);
 			container.getRBContainer().getEverstoneCheckBox().addItemListener( rbListener);
+			container.getRBContainer().getPercentageCheckBox().addItemListener( rbListener);
 		}
 	}
 }
