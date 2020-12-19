@@ -80,7 +80,8 @@ public class PokemonGUIContainer {
 			PokemonHelper.DEF_TEXT,
 			PokemonHelper.SPA_TEXT,
 			PokemonHelper.SPD_TEXT,
-			PokemonHelper.SPE_TEXT);
+			PokemonHelper.SPE_TEXT,
+			"Correct Nature?");
 		highlow_a = new HighLowContainer("A");
 		highlow_b = new HighLowContainer("B");
 		highlow_ab = new HighLowContainer("A & B");
@@ -179,7 +180,7 @@ public class PokemonGUIContainer {
 		panel.add( new JLabel("Select checkmarks you want to include for comparisons:"), c);
 		// Row 1, column 0, width 10
 		c.gridy = 1;
-		panel.add( checkBoxContainer.createCheckBoxPanel(), c);
+		panel.add( checkBoxContainer.createMyDefaultPanel(), c);
 		// Row 2, column 0, width 8
 		c.gridy = 2;
 		c.gridwidth = 8;
