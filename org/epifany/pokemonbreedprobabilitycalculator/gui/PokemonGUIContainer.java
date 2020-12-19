@@ -176,7 +176,7 @@ public class PokemonGUIContainer {
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 10;
-		panel.add( new JLabel("Checkmark the stats you want to include for comparisons:"), c);
+		panel.add( new JLabel("Select checkmarks you want to include for comparisons:"), c);
 		// Row 1, column 0, width 10
 		c.gridy = 1;
 		panel.add( checkBoxContainer.createCheckBoxPanel(), c);
