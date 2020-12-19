@@ -4,6 +4,7 @@
 
 package org.epifany.pokemonbreedprobabilitycalculator;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import org.epifany.pokemonbreedprobabilitycalculator.model.HLIEManager;
 import org.epifany.pokemonbreedprobabilitycalculator.gui.*;
@@ -133,6 +134,7 @@ public class PokemonPresenter {
 		cbContainer.getSpDCheckBox().setSelected( false);
 		cbContainer.getSpeCheckBox().setSelected( false);
 		cbContainer.getEverstoneCheckBox().setSelected(true);
+		cbContainer.getPercentageCheckBox().setSelected(false);
 		// Reset labels
 		view.getHighLowA().setHighInclusiveText( "0 / 0");
 		view.getHighLowA().setHighExclusiveText( "0 / 0");
@@ -155,6 +157,7 @@ public class PokemonPresenter {
 		rbContainer.getSpDIncludeRB().setSelected( true);
 		rbContainer.getSpeIncludeRB().setSelected( true);
 		rbContainer.getEverstoneCheckBox().setSelected(true);
+		rbContainer.getPercentageCheckBox().setSelected(false);
 		// Reset label
 		view.getRBLabel().setText( "0 / 0");
 	}
@@ -193,91 +196,48 @@ public class PokemonPresenter {
 			PokemonProbCBManager probManager = manager.getProbCBManager();
 			probManager.updateProbabilities();
 			PokemonHLABManager swab = probManager.getSWABAt( probManager.getCurrentKey());
+			boolean everstone = manager.getProbCBManager().hasEverstone();
+			boolean percentage = manager.getProbCBManager().showPercentage();
 			// For A, B, then AB
-			updateFlagStateProbabilityDetail( view.getHighLowA(), swab.getManagerA());
-			updateFlagStateProbabilityDetail( view.getHighLowB(), swab.getManagerB());
-			updateFlagStateProbabilityDetail( view.getHighLowAB(), swab.getManagerAB());
+			updateFlagStateProbabilityHighLow( view.getHighLowA(), swab.getManagerA(), everstone, percentage);
+			updateFlagStateProbabilityHighLow( view.getHighLowB(), swab.getManagerB(), everstone, percentage);
+			updateFlagStateProbabilityHighLow( view.getHighLowAB(), swab.getManagerAB(), everstone, percentage);
 			
 			long numerator = swab.getManagerPerfect().getNumerator();
 			long denominator = swab.getManagerPerfect().getDenominator();
-			
-			// everstone, everstone -> 16 million
-			// noitem, everstone -> 16 million
-			// everstone, noitem -> 16 million
-			
-			// only time it'll actually "expand" is if
-			// noitem, noitem -> expand
-			// noitem, dk/poweritem -> expand
-			// dk/poweritem, noitem -> expand
-			
-			// Not having Everstone will expand the probability
-			if( !manager.getCalcManager().hasEverstone()){
-				// Does user want correct Naure?
-				if( manager.getProbCBManager().hasEverstone()){
-					// numerator *= 1;
-				}
-				// User doesn't care about correct nature
-				else{
-					numerator *= PokemonHelper.NUM_NATURES;
-				}
-				denominator *= PokemonHelper.NUM_NATURES;
-			}
-			
-			String text =
-				NumberFormat.getInstance().format(numerator) + " / " +
-				NumberFormat.getInstance().format(denominator);
-			view.getHighLowPerfect().setText( text);
+			view.getHighLowPerfect().setText( getFormattedText( numerator, denominator, everstone, percentage));
 		}
 	}
 	
 	// Method for convenience
-	private void updateFlagStateProbabilityDetail( HighLowContainer swContainer, HLIEManager swie){
+	private void updateFlagStateProbabilityHighLow( HighLowContainer swContainer, HLIEManager swie,
+			boolean everstone, boolean percentage){
 		// For adding commas to large numbers
 		NumberFormat nf = NumberFormat.getInstance();
-		
 		// Inclusively stronger
 		long numerator = swie.getHighInclusive().getNumerator();
 		long denominator = swie.getHighInclusive().getDenominator();
-		// Not having Everstone will expand the probability
-		if( !manager.getCalcManager().hasEverstone()){
-			numerator *= PokemonHelper.NUM_NATURES;
-			denominator *= PokemonHelper.NUM_NATURES;
-		}
-		swContainer.setHighInclusiveText( nf.format(numerator) + " / " + nf.format(denominator));
-		
+		swContainer.setHighInclusiveText(getFormattedText(numerator,denominator, everstone, percentage));
 		// Exclusively stronger
 		numerator = swie.getHighExclusive().getNumerator();
 		denominator = swie.getHighExclusive().getDenominator();
-		// Not having Everstone will expand the probability
-		if( !manager.getCalcManager().hasEverstone()){
-			numerator *= PokemonHelper.NUM_NATURES;
-			denominator *= PokemonHelper.NUM_NATURES;
-		}
-		swContainer.setHighExclusiveText( nf.format(numerator) + " / " + nf.format(denominator));
-		
+		swContainer.setHighExclusiveText( getFormattedText(numerator,denominator, everstone, percentage));
 		// Inclusively weaker
 		numerator = swie.getLowInclusive().getNumerator();
 		denominator = swie.getLowInclusive().getDenominator();
-		// Not having Everstone will expand the probability
-		if( !manager.getCalcManager().hasEverstone()){
-			numerator *= PokemonHelper.NUM_NATURES;
-			denominator *= PokemonHelper.NUM_NATURES;
-		}
-		swContainer.setLowInclusiveText( nf.format(numerator) + " / " + nf.format(denominator));
-		
+		swContainer.setLowInclusiveText( getFormattedText(numerator,denominator, everstone, percentage));
 		// Exclusively weaker
 		numerator = swie.getLowExclusive().getNumerator();
 		denominator = swie.getLowExclusive().getDenominator();
-		// Not having Everstone will expand the probability
-		if( !manager.getCalcManager().hasEverstone()){
-			numerator *= PokemonHelper.NUM_NATURES;
-			denominator *= PokemonHelper.NUM_NATURES;
-		}
-		swContainer.setLowExclusiveText( nf.format(numerator) + " / " + nf.format(denominator));
+		swContainer.setLowExclusiveText( getFormattedText(numerator,denominator, everstone, percentage));
 	}
 	
 	public void updateCBEverstone( boolean flag){
 		manager.getProbCBManager().setEverstone(flag);
+	}
+	
+	public void updateCBPercentage( boolean flag){
+		manager.getProbCBManager().setPercentage(flag);
 	}
 	
 	// This method is called whenever a radiobutton state is changed
@@ -373,25 +333,44 @@ public class PokemonPresenter {
 			prbm.updateProbabilities();
 			long numerator = prbm.getFractionAt( prbm.getCurrentKey()).getNumerator();
 			long denominator = prbm.getFractionAt( prbm.getCurrentKey()).getDenominator();
-			// Not having Everstone will expand the probability
-			if( !manager.getCalcManager().hasEverstone()){
-				// Does user want correct Nature?
-				if( manager.getProbRBManager().hasEverstone()){
-					// numerator *= 1;
-				}
-				// User doesn't care about correct nature
-				else{
-					numerator *= PokemonHelper.NUM_NATURES;
-				}
-				denominator *= PokemonHelper.NUM_NATURES;
-			}
-			view.getRBLabel().setText(
-				NumberFormat.getInstance().format(numerator) + " / " +
-				NumberFormat.getInstance().format(denominator));
+			boolean everstone = manager.getProbRBManager().hasEverstone();
+			boolean percentage = manager.getProbRBManager().showPercentage();
+			view.getRBLabel().setText(getFormattedText( numerator, denominator, everstone, percentage));
 		}
 	}
 	
 	public void updateRBEverstone( boolean flag){
 		manager.getProbRBManager().setEverstone(flag);
+	}
+
+	public void updateRBPercentage( boolean flag){
+		manager.getProbRBManager().setPercentage(flag);
+	}
+	
+	private String getFormattedText( long numerator, long denominator, boolean everstone, boolean percentage){
+		String text;
+		// Not having Everstone will expand the probability
+		if( !manager.getCalcManager().hasEverstone()){
+			// does uer want correct Naure?
+			if( everstone){/*numerator *= 1;*/}
+			// User doesn't care about correct nature
+			else{
+				numerator *= PokemonHelper.NUM_NATURES;
+			}
+			denominator *= PokemonHelper.NUM_NATURES;
+		}
+		// Does user want percentage?
+		if( percentage){
+			numerator *= 100;
+			double num = (double)numerator / denominator;
+			System.out.println("what double is this: " + num);
+			DecimalFormat format = new DecimalFormat("###.#####");
+			text = format.format(num) + " %";
+		}
+		else{
+			text = NumberFormat.getInstance().format(numerator) + " / " +
+			NumberFormat.getInstance().format(denominator);
+		}
+		return text;
 	}
 }
