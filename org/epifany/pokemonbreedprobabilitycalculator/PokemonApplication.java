@@ -35,7 +35,7 @@ public class PokemonApplication {
 	
 	public void createUI(){
 			// Creating frame
-			frame = new JFrame( "Pokemon Genetics Probability Calculator (Gen 6) Marble 2.0 - https://epifany.github.io");
+			frame = new JFrame( "Pokemon Genetics Probability Calculator (Gen 6) 2.0 - https://epifany.github.io");
 			frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
 			frame.setResizable( false);
 

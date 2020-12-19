@@ -25,10 +25,16 @@ public class RadioButtonListener implements ItemListener {
 		String command = button.getActionCommand();
 		boolean flag = ( ie.getStateChange() == ItemEvent.SELECTED);
 		System.out.println( command + " " + flag);
-		if( flag){
+		if( command.equals("Correct Nature?")){
+			presenter.updateRBEverstone(flag);
+			presenter.updateRBStateProbability();
+		}
+		else if(flag){
 			presenter.updateRBState( command, flag);
 			presenter.updateRBStateKey();
 			presenter.updateRBStateProbability();
 		}
+		// Don't do anything if flag was triggered to false
+		else{}
 	}
 }

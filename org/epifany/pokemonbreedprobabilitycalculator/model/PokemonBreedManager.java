@@ -7,6 +7,7 @@ package org.epifany.pokemonbreedprobabilitycalculator.model;
 import java.util.HashMap;
 import org.epifany.permutation.Node;
 import org.epifany.permutation.NodePermutationCalculator;
+import org.epifany.pokemonbreedprobabilitycalculator.PokemonCommand;
 
 /**
  * This class contains a breeding calculator, has knowledge of Pokemon A & Pokemon B,
@@ -24,19 +25,6 @@ public class PokemonBreedManager {
 	/* This maps the (splitted) permutations to the respective IV values.
 	The IV values are obtained from either Pokemon A or Pokemon B */
 	private final HashMap< Node, int[]> IV_map;
-	// Although these variables arne't necessarily needed, I did this for "good practice"
-	protected final int HP_A_INDEX = 0;
-	protected final int ATK_A_INDEX = 1;
-	protected final int DEF_A_INDEX = 2;
-	protected final int SPA_A_INDEX = 3;
-	protected final int SPD_A_INDEX = 4;
-	protected final int SPE_A_INDEX = 5;
-	protected final int HP_B_INDEX = 6;
-	protected final int ATK_B_INDEX = 7;
-	protected final int DEF_B_INDEX = 8;
-	protected final int SPA_B_INDEX = 9;
-	protected final int SPD_B_INDEX = 10;
-	protected final int SPE_B_INDEX = 11;
 	
 	public PokemonBreedManager(){
 		IV_map = new HashMap();
@@ -123,40 +111,40 @@ public class PokemonBreedManager {
 		int[] values = { -1, -1, -1, -1, -1, -1};
 		for( int i = 0; i < elements.length; i++){
 			switch (elements[i]) {
-				case HP_A_INDEX:
+				case PokemonCommand.HP_A_INDEX:
 					values[0] = abManager.getPokemonA().getHP_IV();
 					break;
-				case ATK_A_INDEX:
+				case PokemonCommand.ATK_A_INDEX:
 					values[1] = abManager.getPokemonA().getAtk_IV();
 					break;
-				case DEF_A_INDEX:
+				case PokemonCommand.DEF_A_INDEX:
 					values[2] = abManager.getPokemonA().getDef_IV();
 					break;
-				case SPA_A_INDEX:
+				case PokemonCommand.SPA_A_INDEX:
 					values[3] = abManager.getPokemonA().getSpA_IV();
 					break;
-				case SPD_A_INDEX:
+				case PokemonCommand.SPD_A_INDEX:
 					values[4] = abManager.getPokemonA().getSpD_IV();
 					break;
-				case SPE_A_INDEX:
+				case PokemonCommand.SPE_A_INDEX:
 					values[5] = abManager.getPokemonA().getSpe_IV();
 					break;
-				case HP_B_INDEX:
+				case PokemonCommand.HP_B_INDEX:
 					values[0] = abManager.getPokemonB().getHP_IV();
 					break;
-				case ATK_B_INDEX:
+				case PokemonCommand.ATK_B_INDEX:
 					values[1] = abManager.getPokemonB().getAtk_IV();
 					break;
-				case DEF_B_INDEX:
+				case PokemonCommand.DEF_B_INDEX:
 					values[2] = abManager.getPokemonB().getDef_IV();
 					break;
-				case SPA_B_INDEX:
+				case PokemonCommand.SPA_B_INDEX:
 					values[3] = abManager.getPokemonB().getSpA_IV();
 					break;
-				case SPD_B_INDEX:
+				case PokemonCommand.SPD_B_INDEX:
 					values[4] = abManager.getPokemonB().getSpD_IV();
 					break;
-				case SPE_B_INDEX:
+				case PokemonCommand.SPE_B_INDEX:
 					values[5] = abManager.getPokemonB().getSpe_IV();
 					break;
 				default:

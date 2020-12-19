@@ -52,4 +52,18 @@ public class PokemonCommand {
 	public static final String ITEM_POWERWEIGHT_TEXT = "Power Weight -- (HP)";
 	public static final String ITEM_DESTINYKNOT_TEXT = "Destiny Knot";
 	
+	// Although these variables aren't necessarily needed, I did this for "good practice"
+	public static final int HP_A_INDEX = 0;
+	public static final int ATK_A_INDEX = 1;
+	public static final int DEF_A_INDEX = 2;
+	public static final int SPA_A_INDEX = 3;
+	public static final int SPD_A_INDEX = 4;
+	public static final int SPE_A_INDEX = 5;
+	public static final int HP_B_INDEX = 6;
+	public static final int ATK_B_INDEX = 7;
+	public static final int DEF_B_INDEX = 8;
+	public static final int SPA_B_INDEX = 9;
+	public static final int SPD_B_INDEX = 10;
+	public static final int SPE_B_INDEX = 11;
+	
 }

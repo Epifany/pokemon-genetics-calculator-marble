@@ -24,9 +24,12 @@ public class ButtonListener implements ActionListener {
 		switch (s) {
 			case "Calculate":
 				presenter.reset();
+				
 				presenter.calculate();
+				//presenter.reaffirmCBEverstone();
 				presenter.updateFlagStateKey();
 				presenter.updateFlagStateProbability();
+				//presenter.readdirmRBEverstone();
 				presenter.updateRBStateKey();
 				presenter.updateRBStateProbability();
 				break;

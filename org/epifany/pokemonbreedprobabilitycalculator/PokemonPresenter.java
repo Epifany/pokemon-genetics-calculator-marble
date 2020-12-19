@@ -69,11 +69,13 @@ public class PokemonPresenter {
 		calcManager.setCaclTypeB( type);
 		
 		// By default for this program, everstone was set to true
-		if( list_a.equals(PokemonCommand.ITEM_EVERSTONE_TEXT) || list_b.equals(PokemonCommand.ITEM_EVERSTONE_TEXT))
-			calcManager.setEverstone(true);
+		if( !list_a.equals(PokemonCommand.ITEM_EVERSTONE_TEXT) && !list_b.equals(PokemonCommand.ITEM_EVERSTONE_TEXT)){
+			calcManager.setEverstone(false);
+		}
+		
 		// By default for this program, noitem was set to false
-		if( !list_a.equals(PokemonCommand.ITEM_NONE_TEXT) && !list_b.equals(PokemonCommand.ITEM_NONE_TEXT))
-			calcManager.setNoItem(false);
+		if( list_a.equals(PokemonCommand.ITEM_NONE_TEXT) || list_b.equals(PokemonCommand.ITEM_NONE_TEXT))
+			calcManager.setNoItem(true);
 		
 		calcManager.updateCurrentKey();
 		calcManager.updateCalculators();
@@ -212,7 +214,14 @@ public class PokemonPresenter {
 			
 			// Not having Everstone will expand the probability
 			if( !manager.getCalcManager().hasEverstone()){
-				numerator *= PokemonHelper.NUM_NATURES;
+				// Does user want correct Naure?
+				if( manager.getProbCBManager().hasEverstone()){
+					// numerator *= 1;
+				}
+				// User doesn't care about correct nature
+				else{
+					numerator *= PokemonHelper.NUM_NATURES;
+				}
 				denominator *= PokemonHelper.NUM_NATURES;
 			}
 			
@@ -269,19 +278,14 @@ public class PokemonPresenter {
 		swContainer.setLowExclusiveText( nf.format(numerator) + " / " + nf.format(denominator));
 	}
 	
-	/*
-	private Fraction adjustForEverstone( Fraction f){
-		if( f == null)
-			return null;
-		Fraction result = f;
-		if( !manager.getCalcManager().hasEverstone()){
-			long numerator = f.getNumerator() * PokemonHelper.NUM_NATURES;
-			long denominator = f.getDenominator() * PokemonHelper.NUM_NATURES;
-			result = new Fraction( numerator, denominator);
-		}
-		return result;
+	public void updateCBEverstone( boolean flag){
+		manager.getProbCBManager().setEverstone(flag);
 	}
-	*/
+	
+	public void reaffirmCBEverstone(){
+		manager.getProbCBManager().setEverstone(manager.getProbCBManager().hasEverstone());
+	System.out.println( "CBManager everstone: " + manager.getProbCBManager().hasEverstone());
+	}
 	
 	// This method is called whenever a radiobutton state is changed
 	public void updateRBState( String text, boolean flag){
@@ -378,12 +382,27 @@ public class PokemonPresenter {
 			long denominator = prbm.getFractionAt( prbm.getCurrentKey()).getDenominator();
 			// Not having Everstone will expand the probability
 			if( !manager.getCalcManager().hasEverstone()){
-				numerator *= PokemonHelper.NUM_NATURES;
+				// Does user want correct Nature?
+				if( manager.getProbRBManager().hasEverstone()){
+					// numerator *= 1;
+				}
+				// User doesn't care about correct nature
+				else{
+					numerator *= PokemonHelper.NUM_NATURES;
+				}
 				denominator *= PokemonHelper.NUM_NATURES;
 			}
 			view.getRBLabel().setText(
 				NumberFormat.getInstance().format(numerator) + " / " +
 				NumberFormat.getInstance().format(denominator));
 		}
+	}
+	
+	public void updateRBEverstone( boolean flag){
+		manager.getProbRBManager().setEverstone(flag);
+	}
+	
+	public void readdirmRBEverstone(){
+		manager.getProbRBManager().setEverstone(manager.getProbRBManager().hasEverstone());
 	}
 }
