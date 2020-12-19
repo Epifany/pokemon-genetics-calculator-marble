@@ -26,6 +26,8 @@ public class PokemonProbRBManager {
 	private boolean need_spa;
 	private boolean need_spd;
 	private boolean need_spe;
+	
+	private boolean everstone;
 	// The breed manager associated with the probabilities we'll be computing
 	private final PokemonBreedManager breed;
 	// Optimization
@@ -178,6 +180,8 @@ public class PokemonProbRBManager {
 	public void setNeedSpD( boolean flag){	need_spd = flag;	}
 	public void setNeedSpe( boolean flag){	need_spe = flag;	}
 	
+	public void setEverstone( boolean e){	everstone = e;	}
+	
 	public boolean flagHp(){	return flag_hp;	}
 	public boolean flagAtk(){	return flag_atk;	}
 	public boolean flagDef(){	return flag_def;	}
@@ -191,6 +195,8 @@ public class PokemonProbRBManager {
 	public boolean needSpA(){	return need_spa;	}
 	public boolean needSpD(){	return need_spd;	}
 	public boolean needSpe(){	return need_spe;	}
+	
+	public boolean hasEverstone(){	return everstone;	}
 	
 	public PokemonBreedManager getBreedManager(){	return breed;	}
 	

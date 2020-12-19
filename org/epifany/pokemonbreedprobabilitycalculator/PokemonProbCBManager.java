@@ -24,6 +24,8 @@ public class PokemonProbCBManager {
 	private boolean flag_spa;
 	private boolean flag_spd;
 	private boolean flag_spe;
+	
+	private boolean everstone;
 	// The breed manager associated with the probabilities we'll be computing
 	private final PokemonBreedManager breed;
 	// Optimization
@@ -122,12 +124,16 @@ public class PokemonProbCBManager {
 	public void setFlagSpD( boolean flag){	flag_spd = flag;	}
 	public void setFlagSpe( boolean flag){	flag_spe = flag;	}
 	
+	public void setEverstone( boolean e){	everstone = e;	}
+	
 	public boolean flagHp(){	return flag_hp;	}
 	public boolean flagAtk(){	return flag_atk;	}
 	public boolean flagDef(){	return flag_def;	}
 	public boolean flagSpA(){	return flag_spa;	}
 	public boolean flagSpD(){	return flag_spd;	}
 	public boolean flagSpe(){	return flag_spe;	}
+	
+	public boolean hasEverstone(){	return everstone;	}
 	
 	public PokemonBreedManager getBreedManager(){	return breed;	}
 	public PokemonHLABManager getSWABAt( String key){	return probabilities.get(key);	}
