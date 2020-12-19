@@ -138,17 +138,20 @@ public class PokemonGUIContainer {
 		msgPanel.setLayout( new BoxLayout( msgPanel, BoxLayout.Y_AXIS));
 		//msgPanel.setBorder( BorderFactory.createEtchedBorder());
 		msgPanel.add( highlow_a.getHighInclusiveMsg());
-		msgPanel.add( highlow_b.getHighInclusiveMsg());
-		msgPanel.add( highlow_ab.getHighInclusiveMsg());
 		msgPanel.add( highlow_a.getHighExclusiveMsg());
-		msgPanel.add( highlow_b.getHighExclusiveMsg());
-		msgPanel.add( highlow_ab.getHighExclusiveMsg());
 		msgPanel.add( highlow_a.getLowInclusiveMsg());
-		msgPanel.add( highlow_b.getLowInclusiveMsg());
-		msgPanel.add( highlow_ab.getLowInclusiveMsg());
 		msgPanel.add( highlow_a.getLowExclusiveMsg());
+		
+		msgPanel.add( highlow_b.getHighInclusiveMsg());
+		msgPanel.add( highlow_b.getHighExclusiveMsg());
+		msgPanel.add( highlow_b.getLowInclusiveMsg());
 		msgPanel.add( highlow_b.getLowExclusiveMsg());
+		
+		msgPanel.add( highlow_ab.getHighInclusiveMsg());
+		msgPanel.add( highlow_ab.getHighExclusiveMsg());
+		msgPanel.add( highlow_ab.getLowInclusiveMsg());
 		msgPanel.add( highlow_ab.getLowExclusiveMsg());
+		
 		msgPanel.add( new JLabel("Perfect stats: "));
 		// A panel for where we'll display our results
 		JPanel reportPanel = new JPanel();
@@ -157,17 +160,21 @@ public class PokemonGUIContainer {
 		// Hardcoded preferred size...
 		reportPanel.setPreferredSize( new Dimension( 160, 210));
 		reportPanel.add( highlow_a.getHighInclusive());
-		reportPanel.add( highlow_b.getHighInclusive());
-		reportPanel.add( highlow_ab.getHighInclusive());
 		reportPanel.add( highlow_a.getHighExclusive());
-		reportPanel.add( highlow_b.getHighExclusive());
-		reportPanel.add( highlow_ab.getHighExclusive());
 		reportPanel.add( highlow_a.getLowInclusive());
-		reportPanel.add( highlow_b.getLowInclusive());
-		reportPanel.add( highlow_ab.getLowInclusive());
 		reportPanel.add( highlow_a.getLowExclusive());
+		
+		reportPanel.add( highlow_b.getHighInclusive());
+		reportPanel.add( highlow_b.getHighExclusive());
+		reportPanel.add( highlow_b.getLowInclusive());
 		reportPanel.add( highlow_b.getLowExclusive());
+		
+		reportPanel.add( highlow_ab.getHighInclusive());
+		reportPanel.add( highlow_ab.getHighExclusive());
+		reportPanel.add( highlow_ab.getLowInclusive());
 		reportPanel.add( highlow_ab.getLowExclusive());
+		
+		
 		reportPanel.add( highlow_perfect);
 		// Put all our panels together
 		JPanel panel = new JPanel( new GridBagLayout());
