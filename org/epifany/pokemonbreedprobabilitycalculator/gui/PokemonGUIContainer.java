@@ -94,22 +94,76 @@ public class PokemonGUIContainer {
 	
 	// Default panel
 	public JPanel createDefaultPanel(){
-		JPanel panel = new JPanel( new BorderLayout());
+		JPanel panel = new JPanel( new BorderLayout( 0, 3));
 		panel.setBorder( BorderFactory.createEtchedBorder());
+		
+		/*
+		JPanel inputPanel = new JPanel();
+		inputPanel.setLayout( new BoxLayout( inputPanel, BoxLayout.Y_AXIS));
+		inputPanel.setBorder( BorderFactory.createEtchedBorder());
+		JPanel temp = new JPanel( new BorderLayout());
+		//temp.setAlignmentX(Component.LEFT_ALIGNMENT);
+		temp.add(resetButton, BorderLayout.PAGE_START);
+		resetButton.setAlignmentX( Component.CENTER_ALIGNMENT);
+		inputPanel.add( temp);
+		inputPanel.add( input_a.createInputPanel("Pokemon (A)"));
+		inputPanel.add( input_b.createInputPanel("Pokemon (B)"));
+		*/
+		
+		/*
+		JPanel inputPanel = new JPanel( new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		inputPanel.setBorder( BorderFactory.createEtchedBorder());
+		JPanel temp = input_a.createInputPanel("Pokemon (A)");
+		temp.setPreferredSize( new Dimension( 160, 190));
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridheight = 1;
+		inputPanel.add( temp, c);
+		temp = input_b.createInputPanel("Pokemon (B)");
+		temp.setPreferredSize( new Dimension( 160, 190));
+		c.gridy = 1;
+		c.gridheight = 1;
+		inputPanel.add( temp, c);
+		c.gridy = 5;
+		c.gridheight = 5;
+		c.fill = GridBagConstraints.BOTH;
+		inputPanel.add( calculateButton, c);
+		*/
+		/*
 		// Creating the input panel
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout( new BoxLayout( inputPanel, BoxLayout.Y_AXIS));
 		inputPanel.setBorder( BorderFactory.createEtchedBorder());
-		inputPanel.add( input_a.createInputPanel("Pokemon (A)"));
-		inputPanel.add( input_b.createInputPanel("Pokemon (B)"));
-		calculateButton.setAlignmentX( Component.CENTER_ALIGNMENT);
-		inputPanel.add( calculateButton);
+		JPanel temp = input_a.createInputPanel("Pokemon (A)");
+		temp.setPreferredSize( new Dimension( 160, 190));
+		temp.setAlignmentX(Component.LEFT_ALIGNMENT);
+		inputPanel.add( temp);
+		temp = input_b.createInputPanel("Pokemon (B)");
+		temp.setPreferredSize( new Dimension( 160, 190));
+		temp.setAlignmentX(Component.LEFT_ALIGNMENT);
+		inputPanel.add( temp);
+		temp = new JPanel( new BorderLayout());
+		temp.setAlignmentX(Component.LEFT_ALIGNMENT);
+		temp.setPreferredSize( new Dimension( 160, 155));
+		temp.add(calculateButton);
+		inputPanel.add( temp, BorderLayout.CENTER);
+		*/
+		
+		JPanel inputPanel = new JPanel( new BorderLayout());
+		JPanel temp = new JPanel();
+		temp.setLayout( new BoxLayout( temp, BoxLayout.Y_AXIS));
+		temp.add( input_a.createInputPanel("Pokemon (A)"));
+		temp.add( input_b.createInputPanel("Pokemon (B)"));
+		calculateButton.setPreferredSize( new Dimension( 160, 40));
+		inputPanel.add( calculateButton, BorderLayout.PAGE_END);
+		inputPanel.add( temp, BorderLayout.CENTER);
 		
 		// Creating the output panel
 		JPanel outputPanel = new JPanel();
 		outputPanel.setLayout( new BoxLayout( outputPanel, BoxLayout.Y_AXIS));
 		outputPanel.setBorder( BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Offspring Goal"));
-		JPanel temp = createRadioButtonPanel( "Perfect Stat Probabilities");
+		temp = createRadioButtonPanel( "Perfect Stat Probabilities");
 		temp.setAlignmentX(Component.LEFT_ALIGNMENT);
 		// These numbers were determined after finding out the size of this panel through debugging...
 		temp.setPreferredSize( new Dimension( 335, 225));
