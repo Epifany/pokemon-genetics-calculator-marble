@@ -26,9 +26,9 @@ public class HighLowContainer {
 		lowInclusive = new JLabel("0 / 0");
 		lowExclusive = new JLabel("0 / 0");
 		highInclusiveMsg = new JLabel("Higher (inclusively) than " + subject + ": ");
-		highExclusiveMsg = new JLabel("Higher (exclusively) than " + subject + ": ");
+		highExclusiveMsg = new JLabel("Higher than " + subject + ": ");
 		lowInclusiveMsg = new JLabel("Lower (inclusively) than " + subject + ": ");
-		lowExclusiveMsg = new JLabel("Lower (exclusively) than " + subject + ": ");
+		lowExclusiveMsg = new JLabel("Lower than " + subject + ": ");
 	}
 	
 	// Optional default layout for all components
