@@ -11,8 +11,7 @@ This version adds a new approach (algorithm) to calculating probabilities<br>
 The old version uses a "marble" approach:<br>
 Each of the 12 IVs from the parents are a "marble",
 and (depending on your choice of items i.e. Destiny Knot) a certain amount of marbles are selected to be passed to the baby Pokemon.<br>
-This calculator considers the chance of when IVs overlap, such as when the HP IVs of both parents are selected to be passed down.<br><br>
-
+This calculator considers the chance of when IVs overlap, such as when the HP IVs of both parents are selected to be passed down.<br>
 The new version adds the "slot" approach:<br>
 The program chooses 3, 5, or some other amount (depending on your choice of items) out of the 6 type of stats (e.g. HP, Atk, Def, SpA, SpD, Spe).
 Afterwards, for each stat chosen, it randomly selects an IV from either parents for the baby Pokemon to inherit.<br><br>
