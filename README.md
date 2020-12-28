@@ -16,8 +16,7 @@ The new version adds the "slot" approach:<br>
 The program chooses 3, 5, or some other amount (depending on your choice of items) out of the 6 type of stats (e.g. HP, Atk, Def, SpA, SpD, Spe).
 Afterwards, for each stat chosen, it randomly selects an IV from either parents for the baby Pokemon to inherit.<br><br>
 
-This program follows the breeding mechanics for Pokemon games from generation 6 and onward.<br>
-
+This program follows the breeding mechanics for Pokemon games from generation 6 and onward.
 Versions of the 6th generation of Pokemon include:
 * Omega Ruby
 * Alpha Sapphire
