@@ -1,33 +1,33 @@
 /**
  * Copyright 2020, Stephen Gung, All rights reserved
  */
-package org.epifany.permutation;
+package org.epifany.combination;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is responsible for computing all possible permutations of
+ * This class is responsible for computing all possible combinations of
  * a given set of elements. Duplicate elements are not excluded;
  * computation will treat each element as a unique entity.
  * 
  * @author Stephen Gung
  */
-public class PermutationCalculator {
-	// This is where we'll hold all our set of permutations
-	protected List<List<Integer>> permutations;
-	// The elements used for computing permutations
+public class CombinationCalculator {
+	// This is where we'll hold all our set of combinations
+	protected List<List<Integer>> combinations;
+	// The elements used for computing combinations
 	protected final int[] elements;
-	// The amount of elements each set (of permutations) may contain
+	// The amount of elements each set (of combinations) may contain
 	protected final int limit;
 	
 	/**
 	 * Constructor method with elements from 0 through (elmts - 1)
 	 * @param elmts - Signifies the elements to be used
-	 * @param lim - Signifies the amount of elements contained per permutation
+	 * @param lim - Signifies the amount of elements contained per combination
 	 */
-	public PermutationCalculator( int elmts, int lim){
-		permutations = new ArrayList();
+	public CombinationCalculator( int elmts, int lim){
+		combinations = new ArrayList();
 		elements = new int[elmts];
 		limit = lim;
 		// Setup for cNr formula
@@ -37,16 +37,16 @@ public class PermutationCalculator {
 			bucket.add(i);
 		}
 		// Recursively compute
-		permutation( new ArrayList(), bucket);
+		combination( new ArrayList(), bucket);
 	}
 	
 	/**
 	 * Constructor method with a specified input of elements
 	 * @param elmts - The array of elements
-	 * @param lim - Signifies the amount of elements contained per permutation
+	 * @param lim - Signifies the amount of elements contained per combination
 	 */
-	public PermutationCalculator( int[] elmts, int lim){
-		permutations = new ArrayList();
+	public CombinationCalculator( int[] elmts, int lim){
+		combinations = new ArrayList();
 		elements = new int[elmts.length];
 		limit = lim;
 		// Setup for cNr formula
@@ -56,30 +56,30 @@ public class PermutationCalculator {
 			bucket.add( elmts[i]);
 		}
 		// Recursively compute
-		permutation( new ArrayList(), bucket);
+		combination( new ArrayList(), bucket);
 	}
 	
 	/**
 	 * Copy constructor method
-	 * @param cc - The PermutationCalculator object to be copied
+	 * @param cc - The CombinationCalculator object to be copied
 	 */
-	public PermutationCalculator( PermutationCalculator cc){
-		permutations = new ArrayList( cc.permutations);
+	public CombinationCalculator( CombinationCalculator cc){
+		combinations = new ArrayList( cc.combinations);
 		elements = new int[ cc.elements.length];
 		System.arraycopy(cc.elements, 0, elements, 0, elements.length);
 		limit = cc.limit;
 	}
 	
 	/**
-	 * Recursively computes for all possible permutations
-	 * @param potential - The current set of permutation
+	 * Recursively computes for all possible combinations
+	 * @param potential - The current set of combination
 	 * @param bucket - The current elements left for extraction
 	 */
-	private void permutation( List<Integer> potential, List<Integer> bucket){
-		// If we've reached the maximum amount of elements permitted for a permutation
+	private void combination( List<Integer> potential, List<Integer> bucket){
+		// If we've reached the maximum amount of elements permitted for a combination
 		if( potential.size() >= limit){
-			// Add to our collection of permutationss
-			permutations.add(new ArrayList(potential));
+			// Add to our collection of combinations
+			combinations.add(new ArrayList(potential));
 			return;
 		}
 		// Return if empty bucket or if further computations won't complete a set
@@ -92,19 +92,19 @@ public class PermutationCalculator {
 			// Extract first element
 			potential.add(bucket_local.remove(0));
 			// Recursively compute
-			permutation( potential, bucket_local);
+			combination( potential, bucket_local);
 			// Remove the extracted element for next iteration
 			potential.remove(potential.size()-1);
 		}
 	}
 	
 	/**
-	 * Determines whether list exists within the set of permutations
+	 * Determines whether list exists within the set of combinations
 	 * @param list - The list to be searched
 	 * @return true if list is found, false otherwise
 	 */
 	public boolean contains( List<Integer> list){
-		for( List<Integer> permutation : permutations){
+		for( List<Integer> permutation : combinations){
 			if( permutation.equals(list)){
 				return true;
 			}
@@ -113,25 +113,25 @@ public class PermutationCalculator {
 	}
 	
 	/**
-	 * Removes the permutation at the specified index
+	 * Removes the combination at the specified index
 	 * @param index - The specified index
-	 * @return the permutation that was removed
+	 * @return the combination that was removed
 	 */
 	public List<Integer> remove( int index){
-		return permutations.remove(index);
+		return combinations.remove(index);
 	}
 	
 	/**
-	 * Returns the permutation at the specified index
+	 * Returns the combination at the specified index
 	 * @param index - The specified index
-	 * @return the permutation at the specified index
+	 * @return the combination at the specified index
 	 */
 	public List<Integer> get( int index){
-		return permutations.get(index);
+		return combinations.get(index);
 	}
 	
 	/**
-	 * Returns the elements that were used for computing permutations
+	 * Returns the elements that were used for computing combinations
 	 * @return The elements
 	 */
 	public int[] getElements(){
@@ -139,18 +139,18 @@ public class PermutationCalculator {
 	}
 	
 	/**
-	 * Returns the number representing the amount of elements a single permutation can hold
-	 * @return The amount of elements per permutation
+	 * Returns the number representing the amount of elements a single combination can hold
+	 * @return The amount of elements per combination
 	 */
 	public int getLimit(){
 		return limit;
 	}
 	
 	/**
-	 * Returns the amount of permutations there are
-	 * @return The number of permutations
+	 * Returns the amount of combinations there are
+	 * @return The number of combinations
 	 */
 	public int size(){
-		return permutations.size();
+		return combinations.size();
 	}
 }

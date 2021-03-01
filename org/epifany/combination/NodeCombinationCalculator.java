@@ -1,7 +1,7 @@
 /**
  * Copyright 2020, Stephen Gung, All rights reserved
  */
-package org.epifany.permutation;
+package org.epifany.combination;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,28 +9,28 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This class is an extension of PermutationCalculator.
- * In addition to the functions of PermutationCalculator, this class
+ * This class is an extension of CombinationCalculator.
+ * In addition to the functions of CombinationCalculator, this class
  * is capable of acknowledging certain form of splits (vague)
  * 
  * @author Stephen Gung
  */
-public class NodePermutationCalculator extends PermutationCalculator {
-	// Our set of nodes. The ith node corresponds with the ith permutation
+public class NodeCombinationCalculator extends CombinationCalculator {
+	// Our set of nodes. The ith node corresponds with the ith combination
 	protected final List<Node> nodes;
 	
 	/**
 	 * Constructor method with elements from 0 through (elmts - 1)
 	 * @param elmts - Signifies the elements to be used
-	 * @param lim - Signifies the amount of elements contained per permutation
+	 * @param lim - Signifies the amount of elements contained per combination
 	 */
-	public NodePermutationCalculator( int elmts, int lim){
+	public NodeCombinationCalculator( int elmts, int lim){
 		super( elmts, lim);
-		nodes = new ArrayList( permutations.size());
-		for( List<Integer> permutation : permutations){
-			int[] temp = new int[ permutation.size()];
+		nodes = new ArrayList( combinations.size());
+		for( List<Integer> combination : combinations){
+			int[] temp = new int[ combination.size()];
 			for( int j = 0; j < temp.length; j++){
-				temp[j] = permutation.get(j);
+				temp[j] = combination.get(j);
 			}
 			nodes.add( new Node( null, temp));
 		}
@@ -39,12 +39,12 @@ public class NodePermutationCalculator extends PermutationCalculator {
 	/**
 	 * Constructor method with a specified input of elements
 	 * @param elmts - The array of elements
-	 * @param lim - Signifies the amount of elements contained per permutation
+	 * @param lim - Signifies the amount of elements contained per combination
 	 */
-	public NodePermutationCalculator( int[] elmts, int lim){
+	public NodeCombinationCalculator( int[] elmts, int lim){
 		super( elmts, lim);
-		nodes = new ArrayList( permutations.size());
-		for( List<Integer> permutation : permutations){
+		nodes = new ArrayList( combinations.size());
+		for( List<Integer> permutation : combinations){
 			int[] temp = new int[ permutation.size()];
 			for( int j = 0; j < temp.length; j++){
 				temp[j] = permutation.get(j);
@@ -55,14 +55,14 @@ public class NodePermutationCalculator extends PermutationCalculator {
 
 	/**
 	 * Copy constructor method
-	 * @param ncc - The NodePermutationCalculator object to be copied
+	 * @param ncc - The NodeCombinationCalculator object to be copied
 	 */
-	public NodePermutationCalculator( NodePermutationCalculator ncc){
+	public NodeCombinationCalculator( NodeCombinationCalculator ncc){
 		super( ncc);
 		nodes = new ArrayList( ncc.nodes);
 	}
 	
-	public boolean expandReplacePermutationsValues( List<List<Integer>> indices_a, List<List<Integer>> indices_b){
+	public boolean expandReplaceCombinationsValues( List<List<Integer>> indices_a, List<List<Integer>> indices_b){
 		if( indices_a == null || indices_b == null)
 			return false;
 		// Check to see if all sizes are the same
@@ -71,13 +71,13 @@ public class NodePermutationCalculator extends PermutationCalculator {
 		
 		int height = 0;
 		for( int n = 0; n < nodes.size(); n++){
-			expandReplacePermutationValues( nodes.get(n), height, indices_a.get(n), indices_b.get(n));
+			expandReplaceCombinationValues( nodes.get(n), height, indices_a.get(n), indices_b.get(n));
 		}
 		
 		return true;
 	}
 	
-	private void expandReplacePermutationValues( Node node, int index, List<Integer> indices_a, List<Integer> indices_b){
+	private void expandReplaceCombinationValues( Node node, int index, List<Integer> indices_a, List<Integer> indices_b){
 		if( index >= indices_a.size())
 			return;
 		// Get elements of soon to be parent
@@ -97,8 +97,8 @@ public class NodePermutationCalculator extends PermutationCalculator {
 		node.setLeftChild( leftChild);
 		node.setRightChild( rightChild);
 		// Do the same for left and right child
-		expandReplacePermutationValues( leftChild, index+1, indices_a, indices_b);
-		expandReplacePermutationValues( rightChild, index+1, indices_a, indices_b);
+		expandReplaceCombinationValues( leftChild, index+1, indices_a, indices_b);
+		expandReplaceCombinationValues( rightChild, index+1, indices_a, indices_b);
 	}
 	
 	public boolean splitNodes( int[] split1, int[] split2){
@@ -206,18 +206,18 @@ public class NodePermutationCalculator extends PermutationCalculator {
 	// Method for adding nodes
 	// Note: use this method with caution, it directly adds additional nodes
 	// without regard for the elements & limit of the calculator it is getting the nodes from
-	public boolean addNodes( NodePermutationCalculator npc){
+	public boolean addNodes( NodeCombinationCalculator npc){
 		if( npc == null)
 			return false;
 		for( int i = 0; i < npc.size(); i++){
-			permutations.add( npc.get(i));
+			combinations.add( npc.get(i));
 			nodes.add( npc.getNode(i));
 		}
 		
 		return true;
 	}
 	
-	// Returns the node associated with the ith permutation
+	// Returns the node associated with the ith combination
 	public Node getNode( int index){
 		return nodes.get(index);
 	}

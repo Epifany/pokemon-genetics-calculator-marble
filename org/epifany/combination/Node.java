@@ -1,7 +1,7 @@
 /**
  * Copyright 2020, Stephen Gung, All rights reserved
  */
-package org.epifany.permutation;
+package org.epifany.combination;
 
 /**
  * This class represents a node containing references to a
