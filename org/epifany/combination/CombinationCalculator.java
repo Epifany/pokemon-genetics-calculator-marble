@@ -104,8 +104,8 @@ public class CombinationCalculator {
 	 * @return true if list is found, false otherwise
 	 */
 	public boolean contains( List<Integer> list){
-		for( List<Integer> permutation : combinations){
-			if( permutation.equals(list)){
+		for( List<Integer> combination : combinations){
+			if( combination.equals(list)){
 				return true;
 			}
 		}

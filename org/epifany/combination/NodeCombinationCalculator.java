@@ -44,10 +44,10 @@ public class NodeCombinationCalculator extends CombinationCalculator {
 	public NodeCombinationCalculator( int[] elmts, int lim){
 		super( elmts, lim);
 		nodes = new ArrayList( combinations.size());
-		for( List<Integer> permutation : combinations){
-			int[] temp = new int[ permutation.size()];
+		for( List<Integer> combination : combinations){
+			int[] temp = new int[ combination.size()];
 			for( int j = 0; j < temp.length; j++){
-				temp[j] = permutation.get(j);
+				temp[j] = combination.get(j);
 			}
 			nodes.add( new Node( null, temp));
 		}

@@ -6,7 +6,7 @@ package org.epifany.pokemonbreedprobabilitycalculator;
 
 import org.epifany.pokemonbreedprobabilitycalculator.model.HLIEManager;
 import java.util.HashMap;
-import org.epifany.permutation.Node;
+import org.epifany.combination.Node;
 import org.epifany.pokemonbreedprobabilitycalculator.model.PokemonBreedManager;
 import org.epifany.pokemonbreedprobabilitycalculator.model.PokemonHLABManager;
 import org.epifany.pokemonbreedprobabilitycalculator.model.basic.*;
@@ -62,7 +62,7 @@ public class PokemonProbCBManager {
 			HLIEManager manager_b = new HLIEManager();
 			HLIEManager manager_ab = new HLIEManager();
 			Fraction perfect = new Fraction( 0, 0);
-			// Iterate through every permutation for probability
+			// Iterate through every combination for probability
 			for( int i = 0; i < breed.getCalculator().size(); i++){
 				Node target = breed.getCalculator().getNode(i);
 				Pokemon pokemon_A = breed.getABManager().getPokemonA();

@@ -7,7 +7,7 @@ package org.epifany.pokemonbreedprobabilitycalculator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import org.epifany.permutation.NodePermutationCalculator;
+import org.epifany.combination.NodeCombinationCalculator;
 import org.epifany.pokemon.PokemonHelper;
 
 /**
@@ -24,7 +24,7 @@ public class PokemonCalcManager {
 	
 	private boolean slotApproach;
 	
-	private final HashMap<String, NodePermutationCalculator> calculators;
+	private final HashMap<String, NodeCombinationCalculator> calculators;
 	private String currentKey;
 	
 	public PokemonCalcManager(){
@@ -37,7 +37,7 @@ public class PokemonCalcManager {
 		if( calculators.get( currentKey) == null){
 			System.out.println( "New key: " + currentKey);
 			// Generate a new calculator here
-			NodePermutationCalculator calc_new = (slotApproach) ? slotNewCalculator() : marbleNewCalculator();
+			NodeCombinationCalculator calc_new = (slotApproach) ? slotNewCalculator() : marbleNewCalculator();
 			calculators.put( currentKey, calc_new);
 		}/*
 		else{
@@ -46,8 +46,8 @@ public class PokemonCalcManager {
 	}
 	
 	// Slot approach
-	private NodePermutationCalculator slotNewCalculator(){
-		NodePermutationCalculator calculator;
+	private NodeCombinationCalculator slotNewCalculator(){
+		NodeCombinationCalculator calculator;
 		// Two power items
 		if( currentKey.matches("[0-5][0-5]")){
 			int priority_a = Character.getNumericValue( currentKey.charAt(0));
@@ -61,7 +61,7 @@ public class PokemonCalcManager {
 				}
 			}
 			int[] indices = convertToArray(list);
-			calculator = new NodePermutationCalculator( indices, numElements);
+			calculator = new NodeCombinationCalculator( indices, numElements);
 			// need to replace and expand
 			// Create copies of the permutations
 			List<List<Integer>> permutationsCopy_l = new ArrayList();
@@ -72,7 +72,7 @@ public class PokemonCalcManager {
 			}
 			// In this particular program, we only need to replace values for the "right" side copy
 			replace( permutationsCopy_r);
-			calculator.expandReplacePermutationsValues(permutationsCopy_l, permutationsCopy_r);
+			calculator.expandReplaceCombinationsValues(permutationsCopy_l, permutationsCopy_r);
 			// Now append the priority index to every node
 			for( int i = 0; i < calculator.size(); i++){
 				calculator.appendElement( calculator.getNode(i), priority_a);
@@ -88,7 +88,7 @@ public class PokemonCalcManager {
 				}
 			}
 			indices = convertToArray(list);
-			NodePermutationCalculator calculator2 = new NodePermutationCalculator( indices, numElements);
+			NodeCombinationCalculator calculator2 = new NodeCombinationCalculator( indices, numElements);
 			// need to replace and expand
 			// Create copies of the permutations
 			permutationsCopy_l = new ArrayList();
@@ -99,7 +99,7 @@ public class PokemonCalcManager {
 			}
 			// In this particular program, we only need to replace values for the "right" side copy
 			replace( permutationsCopy_r);
-			calculator2.expandReplacePermutationsValues(permutationsCopy_l, permutationsCopy_r);
+			calculator2.expandReplaceCombinationsValues(permutationsCopy_l, permutationsCopy_r);
 			// Now append the priority index to every node
 			for( int i = 0; i < calculator2.size(); i++){
 				calculator2.appendElement( calculator2.getNode(i), priority_b);
@@ -141,7 +141,7 @@ public class PokemonCalcManager {
 				}
 			}
 			int[] indices = convertToArray(list);
-			calculator = new NodePermutationCalculator( indices, numElements);
+			calculator = new NodeCombinationCalculator( indices, numElements);
 			// need to replace and expand
 			// Create copies of the permutations
 			List<List<Integer>> permutationsCopy_l = new ArrayList();
@@ -152,7 +152,7 @@ public class PokemonCalcManager {
 			}
 			// In this particular program, we only need to replace values for the "right" side copy
 			replace( permutationsCopy_r);
-			calculator.expandReplacePermutationsValues(permutationsCopy_l, permutationsCopy_r);
+			calculator.expandReplaceCombinationsValues(permutationsCopy_l, permutationsCopy_r);
 			// Now append the priority index to every node
 			for( int i = 0; i < calculator.size(); i++){
 				calculator.appendElement( calculator.getNode(i), priority);
@@ -165,7 +165,7 @@ public class PokemonCalcManager {
 								currentKey.equals("nd") ? 5 : 3;
 			int[] indices = { PokemonCommand.HP_A_INDEX, PokemonCommand.ATK_A_INDEX, PokemonCommand.DEF_A_INDEX,
 							PokemonCommand.SPA_A_INDEX, PokemonCommand.SPD_A_INDEX, PokemonCommand.SPE_A_INDEX};
-			calculator = new NodePermutationCalculator( indices, numElements);
+			calculator = new NodeCombinationCalculator( indices, numElements);
 			// Create copies of the permutations
 			List<List<Integer>> permutationsCopy_l = new ArrayList();
 			List<List<Integer>> permutationsCopy_r = new ArrayList();
@@ -175,15 +175,15 @@ public class PokemonCalcManager {
 			}
 			// In this particular program, we only need to replace values for the "right" side copy
 			replace( permutationsCopy_r);
-			calculator.expandReplacePermutationsValues(permutationsCopy_l, permutationsCopy_r);
+			calculator.expandReplaceCombinationsValues(permutationsCopy_l, permutationsCopy_r);
 		}
 		
 		return calculator;
 	}
 	
 	// Marble approach
-	private NodePermutationCalculator marbleNewCalculator(){
-		NodePermutationCalculator calculator;
+	private NodeCombinationCalculator marbleNewCalculator(){
+		NodeCombinationCalculator calculator;
 		int[] indices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 		int[] split_a = { 0, 1, 2, 3, 4, 5};
 		int[] split_b = { 6, 7, 8, 9, 10, 11};
@@ -193,18 +193,18 @@ public class PokemonCalcManager {
 			numElements = 2;
 			int priority_a = Character.getNumericValue( currentKey.charAt(0));
 			int priority_b = Character.getNumericValue( currentKey.charAt(1)) + 6;
-			calculator = new NodePermutationCalculator( indices, numElements);
+			calculator = new NodeCombinationCalculator( indices, numElements);
 			calculator.splitNodes( split_a, split_b);
 			for( int i = 0; i < calculator.size(); i++){
-				List<Integer> permutation = calculator.get(i);
+				List<Integer> combination = calculator.get(i);
 				// "Invalid" set. Remove it, then decrement counter to correctly iterate through list again
-				if( permutation.contains( priority_a) && permutation.contains( priority_b)){
+				if( combination.contains( priority_a) && combination.contains( priority_b)){
 					calculator.remove(i--);
 				}
-				else if( permutation.contains( priority_a)){
+				else if( combination.contains( priority_a)){
 					calculator.appendElement( calculator.getNode(i), priority_b);
 				}
-				else if( permutation.contains( priority_b)){
+				else if( combination.contains( priority_b)){
 					calculator.appendElement( calculator.getNode(i), priority_a);
 				}
 				else{
@@ -243,7 +243,7 @@ public class PokemonCalcManager {
 				}
 			}
 			// New calculator
-			calculator = new NodePermutationCalculator( indices_priority, numElements);
+			calculator = new NodeCombinationCalculator( indices_priority, numElements);
 			calculator.splitNodes( split_a, split_b);
 			// Go through every node and add the master element
 			for( int i = 0; i < calculator.size(); i++){
@@ -255,7 +255,7 @@ public class PokemonCalcManager {
 			numElements =	currentKey.equals("dd") ? 5 :
 							currentKey.equals("dn") ? 5 :
 							currentKey.equals("nd") ? 5 : 3;
-			calculator = new NodePermutationCalculator( indices, numElements);
+			calculator = new NodeCombinationCalculator( indices, numElements);
 			calculator.splitNodes( split_a, split_b);
 		}
 		
@@ -346,7 +346,7 @@ public class PokemonCalcManager {
 	public void setNoItem( boolean i){	noitem = i;	}
 	public void setSlotApproach( boolean sa){	slotApproach = sa;	}
 	
-	public NodePermutationCalculator getCalculatorAt( String key){
+	public NodeCombinationCalculator getCalculatorAt( String key){
 		return calculators.get(key);
 	}
 	
